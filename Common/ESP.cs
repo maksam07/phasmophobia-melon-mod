@@ -17,12 +17,12 @@ namespace C4PhasMod
                         Vector3 w2s2 = ghostAI.transform.position;
                         Vector3 ghostPosition2 = ghostAI.field_Public_Transform_0.transform.position;
 
-                        GUI.Label(new Rect(10f, 200f, 300f, 50f), "<color=#00FF00><b>ghostPosition X:</b> " + ghostPosition2.x + "</color>");
-                        GUI.Label(new Rect(10f, 215f, 300f, 50f), "<color=#00FF00><b>ghostPosition Y:</b> " + ghostPosition2.y + "</color>");
-                        GUI.Label(new Rect(10f, 230f, 300f, 50f), "<color=#00FF00><b>ghostPosition Z:</b> " + ghostPosition2.z + "</color>");
-                        GUI.Label(new Rect(10f, 245f, 300f, 50f), "<color=#00FF00><b>w2s X:</b> " + w2s2.x + "</color>");
-                        GUI.Label(new Rect(10f, 260f, 300f, 50f), "<color=#00FF00><b>w2s Y:</b> " + w2s2.y + "</color>");
-                        GUI.Label(new Rect(10f, 275f, 300f, 50f), "<color=#00FF00><b>w2s Z:</b> " + w2s2.z + "</color>");
+                        //GUI.Label(new Rect(10f, 200f, 300f, 50f), "<color=#00FF00><b>ghostPosition X:</b> " + ghostPosition2.x + "</color>");
+                        //GUI.Label(new Rect(10f, 215f, 300f, 50f), "<color=#00FF00><b>ghostPosition Y:</b> " + ghostPosition2.y + "</color>");
+                        //GUI.Label(new Rect(10f, 230f, 300f, 50f), "<color=#00FF00><b>ghostPosition Z:</b> " + ghostPosition2.z + "</color>");
+                        //GUI.Label(new Rect(10f, 245f, 300f, 50f), "<color=#00FF00><b>w2s X:</b> " + w2s2.x + "</color>");
+                        //GUI.Label(new Rect(10f, 260f, 300f, 50f), "<color=#00FF00><b>w2s Y:</b> " + w2s2.y + "</color>");
+                        //GUI.Label(new Rect(10f, 275f, 300f, 50f), "<color=#00FF00><b>w2s Z:</b> " + w2s2.z + "</color>");
 
                         float ghostNeckMid = Screen.height - ghostPosition.y;
                         float ghostBottomMid = Screen.height - w2s.y;
@@ -38,13 +38,13 @@ namespace C4PhasMod
                     Vector3 w2sP = Main.cameraMain.WorldToScreenPoint(Main.myPlayer.transform.position);
                     Vector3 playerPosition = Main.cameraMain.WorldToScreenPoint(Main.myPlayer.field_Public_Transform_1.transform.position);
 
-                    GUI.Label(new Rect(10f, 290f, 300f, 50f), "---------------------------------------");
-                    GUI.Label(new Rect(10f, 305f, 300f, 50f), "<color=#00FF00><b>playerPosition X:</b> " + playerPosition.x + "</color>");
-                    GUI.Label(new Rect(10f, 320f, 300f, 50f), "<color=#00FF00><b>playerPosition Y:</b> " + playerPosition.y + "</color>");
-                    GUI.Label(new Rect(10f, 335f, 300f, 50f), "<color=#00FF00><b>playerPosition Z:</b> " + playerPosition.z + "</color>");
-                    GUI.Label(new Rect(10f, 350f, 300f, 50f), "<color=#00FF00><b>w2s X:</b> " + w2sP.x + "</color>");
-                    GUI.Label(new Rect(10f, 365f, 300f, 50f), "<color=#00FF00><b>w2s Y:</b> " + w2sP.y + "</color>");
-                    GUI.Label(new Rect(10f, 380f, 300f, 50f), "<color=#00FF00><b>w2s Z:</b> " + w2sP.z + "</color>");
+                    //GUI.Label(new Rect(10f, 290f, 300f, 50f), "---------------------------------------");
+                    //GUI.Label(new Rect(10f, 305f, 300f, 50f), "<color=#00FF00><b>playerPosition X:</b> " + playerPosition.x + "</color>");
+                    //GUI.Label(new Rect(10f, 320f, 300f, 50f), "<color=#00FF00><b>playerPosition Y:</b> " + playerPosition.y + "</color>");
+                    //GUI.Label(new Rect(10f, 335f, 300f, 50f), "<color=#00FF00><b>playerPosition Z:</b> " + playerPosition.z + "</color>");
+                    //GUI.Label(new Rect(10f, 350f, 300f, 50f), "<color=#00FF00><b>w2s X:</b> " + w2sP.x + "</color>");
+                    //GUI.Label(new Rect(10f, 365f, 300f, 50f), "<color=#00FF00><b>w2s Y:</b> " + w2sP.y + "</color>");
+                    //GUI.Label(new Rect(10f, 380f, 300f, 50f), "<color=#00FF00><b>w2s Z:</b> " + w2sP.z + "</color>");
                 }
 
                 if (CheatToggles.enableEspPlayer == true && Main.gameController != null && Main.players != null && Main.players.Count > 1)
