@@ -28,11 +28,17 @@ namespace C4PhasMod
                         case ValueTypePublicSealedObInBoStInBoInInInUnique.EnumNPublicSealedvanoSpWrPhPoBaJiMaReUnique.Spirit:
                             Main.evidence = "Spirit Box | Fingerprints | Ghost Writing";
                             break;
-                        case ValueTypePublicSealedObInBoStInBoInInInUnique.EnumNPublicSealedvanoSpWrPhPoBaJiMaReUnique.Shade:
-                            Main.evidence = "EMF 5 | Ghost Orb | Ghost Writing";
+                        case ValueTypePublicSealedObInBoStInBoInInInUnique.EnumNPublicSealedvanoSpWrPhPoBaJiMaReUnique.Wraith:
+                            Main.evidence = "Spirit Box | Fingerprints | Freezing Temp.";
+                            break;
+                        case ValueTypePublicSealedObInBoStInBoInInInUnique.EnumNPublicSealedvanoSpWrPhPoBaJiMaReUnique.Phantom:
+                            Main.evidence = "EMF 5 | Ghost Orb | Freezing Temp.";
                             break;
                         case ValueTypePublicSealedObInBoStInBoInInInUnique.EnumNPublicSealedvanoSpWrPhPoBaJiMaReUnique.Poltergeist:
                             Main.evidence = "Spirit Box | Fingerprints | Ghost Orb";
+                            break;
+                        case ValueTypePublicSealedObInBoStInBoInInInUnique.EnumNPublicSealedvanoSpWrPhPoBaJiMaReUnique.Banshee:
+                            Main.evidence = "EMF 5 | Fingerprints | Freezing Temp.";
                             break;
                         case ValueTypePublicSealedObInBoStInBoInInInUnique.EnumNPublicSealedvanoSpWrPhPoBaJiMaReUnique.Jinn:
                             Main.evidence = "EMF 5 | Spirit Box | Ghost Orb";
@@ -40,17 +46,14 @@ namespace C4PhasMod
                         case ValueTypePublicSealedObInBoStInBoInInInUnique.EnumNPublicSealedvanoSpWrPhPoBaJiMaReUnique.Mare:
                             Main.evidence = "Spirit Box | Ghost Orb | Freezing Temp.";
                             break;
-                        case ValueTypePublicSealedObInBoStInBoInInInUnique.EnumNPublicSealedvanoSpWrPhPoBaJiMaReUnique.Phantom:
-                            Main.evidence = "EMF 5 | Ghost Orb | Freezing Temp.";
-                            break;
-                        case ValueTypePublicSealedObInBoStInBoInInInUnique.EnumNPublicSealedvanoSpWrPhPoBaJiMaReUnique.Wraith:
-                            Main.evidence = "Spirit Box | Fingerprints | Freezing Temp.";
-                            break;
-                        case ValueTypePublicSealedObInBoStInBoInInInUnique.EnumNPublicSealedvanoSpWrPhPoBaJiMaReUnique.Banshee:
-                            Main.evidence = "EMF 5 | Fingerprints | Freezing Temp.";
-                            break;
                         case ValueTypePublicSealedObInBoStInBoInInInUnique.EnumNPublicSealedvanoSpWrPhPoBaJiMaReUnique.Revenant:
                             Main.evidence = "EMF 5 | Fingerprints | Ghost Writing";
+                            break;
+                        case ValueTypePublicSealedObInBoStInBoInInInUnique.EnumNPublicSealedvanoSpWrPhPoBaJiMaReUnique.Shade:
+                            Main.evidence = "EMF 5 | Ghost Orb | Ghost Writing";
+                            break;
+                        case ValueTypePublicSealedObInBoStInBoInInInUnique.EnumNPublicSealedvanoSpWrPhPoBaJiMaReUnique.Demon:
+                            Main.evidence = "Spirit Box | Ghost Writing | Freezing Temp.";
                             break;
                         case ValueTypePublicSealedObInBoStInBoInInInUnique.EnumNPublicSealedvanoSpWrPhPoBaJiMaReUnique.Yurei:
                             Main.evidence = "Ghost Orb | Ghost Writing | Freezing Temp.";
@@ -58,8 +61,11 @@ namespace C4PhasMod
                         case ValueTypePublicSealedObInBoStInBoInInInUnique.EnumNPublicSealedvanoSpWrPhPoBaJiMaReUnique.Oni:
                             Main.evidence = "EMF 5 | Spirit Box | Ghost Writing";
                             break;
-                        case ValueTypePublicSealedObInBoStInBoInInInUnique.EnumNPublicSealedvanoSpWrPhPoBaJiMaReUnique.Demon:
-                            Main.evidence = "Spirit Box | Ghost Writing | Freezing Temp.";
+                        case ValueTypePublicSealedObInBoStInBoInInInUnique.EnumNPublicSealedvanoSpWrPhPoBaJiMaReUnique.Yokai:
+                            Main.evidence = "Spirit Box | Ghost Orb | Ghost Writing";
+                            break;
+                        case ValueTypePublicSealedObInBoStInBoInInInUnique.EnumNPublicSealedvanoSpWrPhPoBaJiMaReUnique.Hantu:
+                            Main.evidence = "Fingerprints | Ghost Orb | Ghost Writing";
                             break;
                         default:
                             break;
