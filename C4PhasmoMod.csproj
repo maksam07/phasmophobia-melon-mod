@@ -67,6 +67,10 @@
       <HintPath>S:\Games\steamapps\common\Phasmophobia\MelonLoader\MelonLoader.ModHandler.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Photon3Unity3D">
+      <HintPath>S:\Games\steamapps\common\Phasmophobia\MelonLoader\Managed\Photon3Unity3D.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="PhotonRealtime">
       <HintPath>S:\Games\steamapps\common\Phasmophobia\MelonLoader\Managed\PhotonRealtime.dll</HintPath>
       <Private>False</Private>
