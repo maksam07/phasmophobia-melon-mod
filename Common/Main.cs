@@ -526,36 +526,8 @@ namespace C4PhasMod
                 }
                 else
                 {
-                    if (initializedScene == 1 && playerStatsManager != null)
+                    if (initializedScene == 1 )
                     {
-                        if (GUI.Button(new Rect(500f, 2f, 150f, 20f), "+ 1.000$") && levelController == null)
-                        {
-                            var money = FileBasedPrefs.GetInt("PlayersMoney", 0);
-                            Debug.Msg("Money set from " + money + " to " + (money + 1000), 1);
-                            FileBasedPrefs.SetInt("PlayersMoney", money + 1000);
-                            playerStatsManager.UpdateMoney();
-                        }
-                        if (GUI.Button(new Rect(500f, 22f, 150f, 20f), "- 1.000$") && levelController == null)
-                        {
-                            var money = FileBasedPrefs.GetInt("PlayersMoney", 0);
-                            Debug.Msg("Money set from " + money + " to " + (money - 1000), 1);
-                            FileBasedPrefs.SetInt("PlayersMoney", money - 1000);
-                            playerStatsManager.UpdateMoney();
-                        }
-                        if (GUI.Button(new Rect(500f, 42f, 150f, 20f), "+ 100XP") && levelController == null)
-                        {
-                            FileBasedPrefs.SetInt("myTotalExp", FileBasedPrefs.GetInt("myTotalExp", 0) + 100);
-                            playerStatsManager.UpdateExperience();
-                            playerStatsManager.UpdateLevel();
-                            Debug.Msg("XP: +100", 1);
-                        }
-                        if (GUI.Button(new Rect(500f, 62f, 150f, 20f), "- 1.000XP") && levelController == null)
-                        {
-                            FileBasedPrefs.SetInt("myTotalExp", FileBasedPrefs.GetInt("myTotalExp", 0) - 1000);
-                            playerStatsManager.UpdateExperience();
-                            playerStatsManager.UpdateLevel();
-                            Debug.Msg("XP: -1.000", 1);
-                        }
                         if (GUI.Toggle(new Rect(500f, 82f, 150f, 20f), CheatToggles.guiDebug, "Debug GUI") != CheatToggles.guiDebug)
                         {
                             CheatToggles.guiDebug = !CheatToggles.guiDebug;
