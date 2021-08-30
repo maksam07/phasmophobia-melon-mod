@@ -1,4 +1,5 @@
-﻿using MelonLoader;
+﻿using ExitGames.Client.Photon;
+using MelonLoader;
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
@@ -23,27 +24,46 @@ namespace C4PhasMod
             HandleConfig();
         }
 
-        public override void OnLevelWasLoaded(int index)
+        public override void OnSceneWasLoaded(int index, string level)
         {
             if (initializedScene == 1)
+            {
                 gameStarted = true;
+            }
         }
 
-        public override void OnLevelWasInitialized(int index)
+        public override void OnSceneWasInitialized(int index, string level)
         {
             initializedScene = index;
-            if (initializedScene > 0 && canRun)
+            if (initializedScene > 1 && canRun)
             {
                 canRun = false;
                 coRoutine = null;
                 isRunning = false;
                 new Thread(() =>
                 {
-                    while (true)
+                    while (initializedScene > 1)
                     {
                         if (!isRunning)
                         {
                             coRoutine = MelonCoroutines.Start(CollectGameObjects());
+                        }
+                        Thread.Sleep(5000);
+                    }
+                }).Start();
+            }
+            if (initializedScene == 1 && canRun)
+            {
+                canRun = false;
+                coRoutine = null;
+                isRunning = false;
+                new Thread(() =>
+                {
+                    while (initializedScene == 1)
+                    {
+                        if (!isRunning)
+                        {
+                            coRoutine = MelonCoroutines.Start(CollectPlayerObjects());
                         }
                         Thread.Sleep(5000);
                     }
@@ -241,32 +261,36 @@ namespace C4PhasMod
                         {
                             CheatToggles.enableEspGhost = !CheatToggles.enableEspGhost;
                             Debug.Msg("Ghost ESP: Toggled " + (CheatToggles.enableEspGhost ? "On" : "Off"), 1);
-
                         }
-                        if (GUI.Toggle(new Rect(650f, 22f, 150f, 20f), CheatToggles.enableEspPlayer, "Player ESP") != CheatToggles.enableEspPlayer)
+                        if (GUI.Toggle(new Rect(650f, 22f, 150f, 20f), CheatToggles.enableEspGhostBone, "Ghost Bone ESP") != CheatToggles.enableEspGhostBone)
+                        {
+                            CheatToggles.enableEspGhostBone = !CheatToggles.enableEspGhostBone;
+                            Debug.Msg("Ghost Bone ESP: Toggled " + (CheatToggles.enableEspGhostBone ? "On" : "Off"), 1);
+                        }
+                        if (GUI.Toggle(new Rect(650f, 42f, 150f, 20f), CheatToggles.enableEspPlayer, "Player ESP") != CheatToggles.enableEspPlayer)
                         {
                             CheatToggles.enableEspPlayer = !CheatToggles.enableEspPlayer;
                             Debug.Msg("Player ESP: Toggled " + (CheatToggles.enableEspPlayer ? "On" : "Off"), 1);
 
                         }
-                        if (GUI.Toggle(new Rect(650f, 42f, 150f, 20f), CheatToggles.enableEspBone, "Bone ESP") != CheatToggles.enableEspBone)
+                        if (GUI.Toggle(new Rect(650f, 62f, 150f, 20f), CheatToggles.enableEspBone, "Bone ESP") != CheatToggles.enableEspBone)
                         {
                             CheatToggles.enableEspBone = !CheatToggles.enableEspBone;
                             Debug.Msg("Bone ESP: Toggled " + (CheatToggles.enableEspBone ? "On" : "Off"), 1);
 
                         }
-                        if (GUI.Toggle(new Rect(650f, 62f, 150f, 20f), CheatToggles.enableEspOuija, "Ouija ESP") != CheatToggles.enableEspOuija)
+                        if (GUI.Toggle(new Rect(650f, 82f, 150f, 20f), CheatToggles.enableEspOuija, "Ouija ESP") != CheatToggles.enableEspOuija)
                         {
                             CheatToggles.enableEspOuija = !CheatToggles.enableEspOuija;
                             Debug.Msg("Ouija ESP: Toggled " + (CheatToggles.enableEspOuija ? "On" : "Off"), 1);
 
                         }
-                        if (GUI.Toggle(new Rect(650f, 82f, 150f, 20f), CheatToggles.enableEspFuseBox, "FuseBox ESP") != CheatToggles.enableEspFuseBox)
+                        if (GUI.Toggle(new Rect(650f, 102f, 150f, 20f), CheatToggles.enableEspFuseBox, "FuseBox ESP") != CheatToggles.enableEspFuseBox)
                         {
                             CheatToggles.enableEspFuseBox = !CheatToggles.enableEspFuseBox;
                             Debug.Msg("FuseBox ESP: Toggled " + (CheatToggles.enableEspFuseBox ? "On" : "Off"), 1);
                         }
-                        if (GUI.Toggle(new Rect(650f, 102f, 150f, 20f), CheatToggles.enableEspEmf, "Emf ESP") != CheatToggles.enableEspEmf)
+                        if (GUI.Toggle(new Rect(650f, 122f, 150f, 20f), CheatToggles.enableEspEmf, "Emf ESP") != CheatToggles.enableEspEmf)
                         {
                             CheatToggles.enableEspEmf = !CheatToggles.enableEspEmf;
                             Debug.Msg("Emf ESP: Toggled " + (CheatToggles.enableEspEmf ? "On" : "Off"), 1);
@@ -325,7 +349,7 @@ namespace C4PhasMod
                         {
                             CheatToggles.enableHotkeys = !CheatToggles.enableHotkeys;
                             Debug.Msg("Troll Hotkeys: Toggled " + (CheatToggles.enableHotkeys ? "On" : "Off"), 1);
-                            MelonPrefs.SetBool("Settings", "HotkeysEnabled", CheatToggles.enableHotkeys);
+                            MelonPreferences.SetEntryValue("Settings", "HotkeysEnabled", CheatToggles.enableHotkeys);
                         }
                     }
                     if (GUI.Toggle(new Rect(500f, 62f, 150f, 20f), CheatToggles.guiTroll, "Troll GUI") != CheatToggles.guiTroll)
@@ -523,12 +547,23 @@ namespace C4PhasMod
                             Debug.Msg("Blinking Lights", 1);
                         }
                     }
+                    GUI.SetNextControlName("changeName");
+                    playerName = GUI.TextArea(new Rect(650f, 2f, 150f, 20f), playerName);
+                    if (GUI.Button(new Rect(800f, 2f, 150f, 20f), "Change Name"))
+                    {
+                        GUI.FocusControl("changeName");
+                        PhotonNetwork.NickName = playerName;
+                        Photon.Realtime.Player playerPR = PhotonNetwork.LocalPlayer;
+                        playerPR.nickName = playerName;
+                        playerPR.NickName = playerName;
+                        Debug.Msg("Set name: " + playerName, 1);
+                    }
                 }
                 else
                 {
-                    if (initializedScene == 1 )
+                    if (initializedScene == 1)
                     {
-                        if (GUI.Toggle(new Rect(500f, 82f, 150f, 20f), CheatToggles.guiDebug, "Debug GUI") != CheatToggles.guiDebug)
+                        if (GUI.Toggle(new Rect(350f, 2f, 150f, 20f), CheatToggles.guiDebug, "Debug GUI") != CheatToggles.guiDebug)
                         {
                             CheatToggles.guiDebug = !CheatToggles.guiDebug;
                             CheatToggles.guiGhost = false;
@@ -542,22 +577,22 @@ namespace C4PhasMod
                         }
                         if (CheatToggles.guiDebug == true)
                         {
-                            if (GUI.Toggle(new Rect(550f, 102f, 150f, 20f), CheatToggles.enableDebug, "Enable Debug") != CheatToggles.enableDebug)
+                            if (GUI.Toggle(new Rect(370f, 22f, 150f, 20f), CheatToggles.enableDebug, "Enable Debug") != CheatToggles.enableDebug)
                             {
                                 CheatToggles.enableDebug = !CheatToggles.enableDebug;
                                 Debug.Msg("Debug: Toggled " + (CheatToggles.enableDebug ? "On" : "Off"), 1);
                             }
-                            if (GUI.Toggle(new Rect(550f, 122f, 150f, 20f), Debug.debugMode1, "Debug Mode 1") != Debug.debugMode1)
+                            if (GUI.Toggle(new Rect(370f, 42f, 150f, 20f), Debug.debugMode1, "Debug Mode 1") != Debug.debugMode1)
                             {
                                 Debug.debugMode1 = !Debug.debugMode1;
                                 Debug.Msg("Debug Mode 1: Toggled " + (Debug.debugMode1 ? "On" : "Off"), 1);
                             }
-                            if (GUI.Toggle(new Rect(550f, 142f, 150f, 20f), Debug.debugMode2, "Debug Mode 2") != Debug.debugMode2)
+                            if (GUI.Toggle(new Rect(370f, 62f, 150f, 20f), Debug.debugMode2, "Debug Mode 2") != Debug.debugMode2)
                             {
                                 Debug.debugMode2 = !Debug.debugMode2;
                                 Debug.Msg("Debug Mode 2: Toggled " + (Debug.debugMode2 ? "On" : "Off"), 1);
                             }
-                            if (GUI.Toggle(new Rect(550f, 162f, 150f, 20f), Debug.debugMode3, "Debug Mode 3") != Debug.debugMode3)
+                            if (GUI.Toggle(new Rect(370f, 82f, 150f, 20f), Debug.debugMode3, "Debug Mode 3") != Debug.debugMode3)
                             {
                                 Debug.debugMode3 = !Debug.debugMode3;
                                 Debug.Msg("Debug Mode 3: Toggled " + (Debug.debugMode3 ? "On" : "Off"), 1);
@@ -566,11 +601,19 @@ namespace C4PhasMod
 
                         GUI.SetNextControlName("changeName");
                         playerName = GUI.TextArea(new Rect(650f, 2f, 150f, 20f), playerName);
-                        if (GUI.Button(new Rect(650f, 22f, 150f, 20f), "Change Name"))
+                        if (GUI.Button(new Rect(800f, 2f, 150f, 20f), "Change Name"))
                         {
                             GUI.FocusControl("changeName");
-                            PhotonNetwork.NickName = playerName;
                             Debug.Msg("Set name: " + playerName, 1);
+                            PhotonNetwork.NickName = playerName;
+                            Player localPlayer = GetLocalPlayer();
+                            localPlayer.name = playerName;
+                            Photon.Realtime.Player playerPR = PhotonNetwork.LocalPlayer ?? null;
+                            if (playerPR != null)
+                            {
+                                playerPR.nickName = playerName;
+                                playerPR.NickName = playerName;
+                            }
                         }
                     }
                 }
@@ -598,7 +641,6 @@ namespace C4PhasMod
             {
                 if (initializedScene > 1)
                 {
-                    Debug.Msg("BasicInformations.DisableGhost", 3);
                     BasicInformations.DisableGhost();
                 }
             }
@@ -648,6 +690,7 @@ namespace C4PhasMod
 
             CheatToggles.enableEsp = false;
             CheatToggles.enableEspGhost = false;
+            CheatToggles.enableEspGhostBone = false;
             CheatToggles.enableEspPlayer = false;
             CheatToggles.enableEspBone = false;
             CheatToggles.enableEspOuija = false;
@@ -683,37 +726,44 @@ namespace C4PhasMod
 
         private void HandleConfig()
         {
-            MelonPrefs.RegisterCategory("Settings", "Settings");
-            Debug.Msg("Create Category: Settings", 2);
+            MelonPreferences.Load();
+            settingsExist = MelonPreferences.HasEntry("Settings", "HotkeysEnabled");
+            if (settingsExist)
+            {
+                CheatToggles.enableHotkeys = MelonPreferences.GetEntryValue<bool>("Settings", "HotkeysEnabled");
+                CheatToggles.enableDebug = MelonPreferences.GetEntryValue<bool>("Settings", "DebugEnabled");
+                Debug.debugMode1 = MelonPreferences.GetEntryValue<bool>("Settings", "DebugM1Enabled");
+                Debug.debugMode2 = MelonPreferences.GetEntryValue<bool>("Settings", "DebugM2Enabled");
+                Debug.debugMode3 = MelonPreferences.GetEntryValue<bool>("Settings", "DebugM3Enabled");
+            }
+            else
+            {
+                Debug.Msg("Create Config!", 2);
+                MelonPreferences.CreateCategory("Settings", "Settings");
+                Debug.Msg("Create Category: Settings", 2);
 
-            MelonPrefs.RegisterBool("Settings", "HotkeysEnabled", true, "Hotkeys Enabled");
-            Debug.Msg("Create Entry: HotkeysEnabled", 2);
+                MelonPreferences.CreateEntry("Settings", "HotkeysEnabled", true, "Hotkeys Enabled");
+                Debug.Msg("Create Entry: HotkeysEnabled", 2);
 
-            MelonPrefs.RegisterBool("Settings", "DebugEnabled", true, "Debug Enabled");
-            Debug.Msg("Create Entry: DebugEnabled", 2);
+                MelonPreferences.CreateEntry("Settings", "DebugEnabled", true, "Debug Enabled");
+                Debug.Msg("Create Entry: DebugEnabled", 2);
 
-            MelonPrefs.RegisterBool("Settings", "DebugM1Enabled", true, "Debug M1 Enabled");
-            Debug.Msg("Create Entry: Debug1Enabled", 2);
+                MelonPreferences.CreateEntry("Settings", "DebugM1Enabled", true, "Debug M1 Enabled");
+                Debug.Msg("Create Entry: Debug1Enabled", 2);
 
-            MelonPrefs.RegisterBool("Settings", "DebugM2Enabled", true, "Debug M2 Enabled");
-            Debug.Msg("Create Entry: Debug2Enabled", 2);
+                MelonPreferences.CreateEntry("Settings", "DebugM2Enabled", true, "Debug M2 Enabled");
+                Debug.Msg("Create Entry: Debug2Enabled", 2);
 
-            MelonPrefs.RegisterBool("Settings", "DebugM3Enabled", false, "Debug M3 Enabled");
-            Debug.Msg("Create Entry: Debug3Enabled", 2);
-
-            CheatToggles.enableHotkeys = MelonPrefs.GetBool("Settings", "HotkeysEnabled");
-            CheatToggles.enableDebug = MelonPrefs.GetBool("Settings", "DebugEnabled");
-
-            Debug.debugMode1 = MelonPrefs.GetBool("Settings", "DebugM1Enabled");
-            Debug.debugMode2 = MelonPrefs.GetBool("Settings", "DebugM2Enabled");
-            Debug.debugMode3 = MelonPrefs.GetBool("Settings", "DebugM3Enabled");
-
-            MelonPrefs.SaveConfig();
+                MelonPreferences.CreateEntry("Settings", "DebugM3Enabled", false, "Debug M3 Enabled");
+                Debug.Msg("Create Entry: Debug3Enabled", 2);
+            }
+            MelonPreferences.Save();
         }
 
         IEnumerator CollectGameObjects()
         {
-            try {
+            try
+            {
                 Debug.Msg("isRunningTrue", 3);
                 isRunning = true;
                 Debug.Msg("cameraMain", 3);
@@ -818,8 +868,60 @@ namespace C4PhasMod
                 Debug.Msg("-----------------------------", 3);
 
                 yield return null;
-            } finally {
-                if(isRunning) {
+            }
+            finally
+            {
+                if (isRunning)
+                {
+                    Debug.Msg("Unexpected Error while collecting game objects.");
+                    isRunning = false;
+                }
+            }
+        }
+
+        IEnumerator CollectPlayerObjects()
+        {
+            try
+            {
+                Debug.Msg("isRunningTrue", 3);
+                isRunning = true;
+                Debug.Msg("cameraMain", 3);
+                cameraMain = Camera.main ?? null;
+                yield return new WaitForSeconds(0.15f);
+
+                Debug.Msg("gameController", 3);
+                gameController = Object.FindObjectOfType<GameController>() ?? null;
+                yield return new WaitForSeconds(0.15f);
+
+                if (Object.FindObjectOfType<Player>() != null)
+                {
+                    Debug.Msg("player", 3);
+                    player = Object.FindObjectOfType<Player>() ?? null;
+                    yield return new WaitForSeconds(0.15f);
+
+                    Debug.Msg("players", 3);
+                    players = Object.FindObjectsOfType<Player>().ToList<Player>() ?? null;
+                    yield return new WaitForSeconds(0.15f);
+
+                    Debug.Msg("playerStatsManager", 3);
+                    playerStatsManager = Object.FindObjectOfType<PlayerStatsManager>() ?? null;
+                    yield return new WaitForSeconds(0.15f);
+
+                    Debug.Msg("myPlayer", 3);
+                    myPlayer = GetLocalPlayer() ?? player;
+                    yield return new WaitForSeconds(0.15f);
+                }
+
+                isRunning = false;
+                yield return new WaitForSeconds(0.15f);
+                Debug.Msg("-----------------------------", 3);
+
+                yield return null;
+            }
+            finally
+            {
+                if (isRunning)
+                {
                     Debug.Msg("Unexpected Error while collecting game objects.");
                     isRunning = false;
                 }

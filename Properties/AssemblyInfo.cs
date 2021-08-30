@@ -10,4 +10,5 @@ using MelonLoader;
 [assembly: AssemblyVersion(C4PhasMod.BuildInfo.Version)]
 [assembly: AssemblyFileVersion(C4PhasMod.BuildInfo.Version)]
 [assembly: MelonInfo(typeof(C4PhasMod.Main), C4PhasMod.BuildInfo.Name, C4PhasMod.BuildInfo.Version, C4PhasMod.BuildInfo.Author, C4PhasMod.BuildInfo.DownloadLink)]
+[assembly: MelonColor(System.ConsoleColor.DarkCyan)]
 [assembly: MelonGame("Kinetic Games", "Phasmophobia")]

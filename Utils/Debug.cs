@@ -9,11 +9,11 @@ namespace C4PhasMod
         {
             if (CheatToggles.enableDebug && mode > 0) { 
                 if(debugMode1 && mode == 1)
-                    MelonLogger.Log($"[+] {text}");
+                    MelonLogger.Msg($"[+] {text}");
                 if (debugMode2 && mode == 2)
-                    MelonLogger.Log($"[#] {text}");
+                    MelonLogger.Msg($"[#] {text}");
                 if (debugMode3 && mode == 3)
-                    MelonLogger.Log($"[D] {text}");
+                    MelonLogger.Msg($"[D] {text}");
             }
         }
 

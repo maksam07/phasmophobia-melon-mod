@@ -49,25 +49,25 @@ namespace C4PhasMod
             {
                 IntPtr allocMemAddress = VirtualAllocEx(procHandle, IntPtr.Zero, (uint)((dllName.Length + 1) * Marshal.SizeOf(typeof(char))), MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
                 UIntPtr bytesWritten;
-                MelonLogger.Log("Injecting PhasBypass.dll...");
+                MelonLogger.Msg("Injecting PhasBypass.dll...");
                 if (WriteProcessMemory(procHandle, allocMemAddress, Encoding.Default.GetBytes(dllName), (uint)((dllName.Length + 1) * Marshal.SizeOf(typeof(char))), out bytesWritten))
                 {
                     IntPtr tHandle = CreateRemoteThread(procHandle, IntPtr.Zero, 0, loadLibraryAddr, allocMemAddress, 0, IntPtr.Zero);
                     if (tHandle != IntPtr.Zero)
                     {
-                        MelonLogger.Log("PhasBypass.dll successfully injected!");
+                        MelonLogger.Msg("PhasBypass.dll successfully injected!");
                     }
                     else
                     {
-                        MelonLogger.Log("PhasBypass.dll can't be injected!");
-                        MelonLogger.Log("Please restart the game!");
+                        MelonLogger.Msg("PhasBypass.dll can't be injected!");
+                        MelonLogger.Msg("Please restart the game!");
                     }
                 }
             }
             else
             {
-                MelonLogger.Log("PhasBypass.dll not found!");
-                MelonLogger.Log("Please restart the game!");
+                MelonLogger.Msg("PhasBypass.dll not found!");
+                MelonLogger.Msg("Please restart the game!");
             }
             return 0;
         }

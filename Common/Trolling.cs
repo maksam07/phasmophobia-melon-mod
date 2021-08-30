@@ -72,7 +72,6 @@ namespace C4PhasMod
             Debug.Msg("Troll->Interact: Triggered", 1);
             Main.ghostAI.RandomEvent();
             Main.ghostActivity.Interact();
-            Main.ghostAI.field_Public_GhostActivity_0.InteractWithARandomDoor();
             Main.ghostAI.field_Public_GhostActivity_0.InteractWithARandomProp();
             Main.ghostAI.field_Public_GhostActivity_0.Interact();
         }

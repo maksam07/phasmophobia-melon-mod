@@ -9,6 +9,7 @@
 
         public static bool enableEsp = false;
         public static bool enableEspGhost = false;
+        public static bool enableEspGhostBone = false;
         public static bool enableEspPlayer = false;
         public static bool enableEspBone = false;
         public static bool enableEspOuija = false;

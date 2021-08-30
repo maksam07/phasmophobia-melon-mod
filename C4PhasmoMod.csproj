@@ -63,9 +63,8 @@
       <HintPath>S:\Games\steamapps\common\Phasmophobia\MelonLoader\Managed\Il2Cppmscorlib.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="MelonLoader.ModHandler">
-      <HintPath>S:\Games\steamapps\common\Phasmophobia\MelonLoader\MelonLoader.ModHandler.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="MelonLoader">
+      <HintPath>S:\Games\steamapps\common\Phasmophobia\MelonLoader\MelonLoader.dll</HintPath>
     </Reference>
     <Reference Include="Photon3Unity3D">
       <HintPath>S:\Games\steamapps\common\Phasmophobia\MelonLoader\Managed\Photon3Unity3D.dll</HintPath>

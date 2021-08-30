@@ -17,13 +17,6 @@ namespace C4PhasMod
                         Vector3 w2s2 = ghostAI.transform.position;
                         Vector3 ghostPosition2 = ghostAI.field_Public_Transform_0.transform.position;
 
-                        //GUI.Label(new Rect(10f, 200f, 300f, 50f), "<color=#00FF00><b>ghostPosition X:</b> " + ghostPosition2.x + "</color>");
-                        //GUI.Label(new Rect(10f, 215f, 300f, 50f), "<color=#00FF00><b>ghostPosition Y:</b> " + ghostPosition2.y + "</color>");
-                        //GUI.Label(new Rect(10f, 230f, 300f, 50f), "<color=#00FF00><b>ghostPosition Z:</b> " + ghostPosition2.z + "</color>");
-                        //GUI.Label(new Rect(10f, 245f, 300f, 50f), "<color=#00FF00><b>w2s X:</b> " + w2s2.x + "</color>");
-                        //GUI.Label(new Rect(10f, 260f, 300f, 50f), "<color=#00FF00><b>w2s Y:</b> " + w2s2.y + "</color>");
-                        //GUI.Label(new Rect(10f, 275f, 300f, 50f), "<color=#00FF00><b>w2s Z:</b> " + w2s2.z + "</color>");
-
                         float ghostNeckMid = Screen.height - ghostPosition.y;
                         float ghostBottomMid = Screen.height - w2s.y;
                         float ghostTopMid = ghostNeckMid - (ghostBottomMid - ghostNeckMid) / 5;
@@ -34,18 +27,95 @@ namespace C4PhasMod
                             continue;
 
                         Drawing.DrawBoxOutline(new Vector2(w2s.x - (boxWidth / 2f), ghostNeckMid), boxWidth, boxHeight, Color.cyan);
+                        //ghostAI.field_Public_EnumNPublicSealedvaidwahufalidothfuapUnique_0 = GhostAI.EnumNPublicSealedvaidwahufalidothfuapUnique.appear;
+                        //ghostAI.field_Public_Single_0 = 100f;
+                        //ghostAI.field_Public_Boolean_1 = true;
                     }
-                    Vector3 w2sP = Main.cameraMain.WorldToScreenPoint(Main.myPlayer.transform.position);
-                    Vector3 playerPosition = Main.cameraMain.WorldToScreenPoint(Main.myPlayer.field_Public_Transform_1.transform.position);
-
-                    //GUI.Label(new Rect(10f, 290f, 300f, 50f), "---------------------------------------");
-                    //GUI.Label(new Rect(10f, 305f, 300f, 50f), "<color=#00FF00><b>playerPosition X:</b> " + playerPosition.x + "</color>");
-                    //GUI.Label(new Rect(10f, 320f, 300f, 50f), "<color=#00FF00><b>playerPosition Y:</b> " + playerPosition.y + "</color>");
-                    //GUI.Label(new Rect(10f, 335f, 300f, 50f), "<color=#00FF00><b>playerPosition Z:</b> " + playerPosition.z + "</color>");
-                    //GUI.Label(new Rect(10f, 350f, 300f, 50f), "<color=#00FF00><b>w2s X:</b> " + w2sP.x + "</color>");
-                    //GUI.Label(new Rect(10f, 365f, 300f, 50f), "<color=#00FF00><b>w2s Y:</b> " + w2sP.y + "</color>");
-                    //GUI.Label(new Rect(10f, 380f, 300f, 50f), "<color=#00FF00><b>w2s Z:</b> " + w2sP.z + "</color>");
+                    //Vector3 w2sP = Main.cameraMain.WorldToScreenPoint(Main.myPlayer.transform.position);
+                    //Vector3 playerPosition = Main.cameraMain.WorldToScreenPoint(Main.myPlayer.field_Public_Transform_1.transform.position);
                 }
+
+                /*if (1==2 && CheatToggles.enableEspGhostBone == true && Main.gameController != null && Main.ghostAI != null && Main.ghostAIs.Count > 0)
+                {
+                    foreach (GhostAI ghostAI in Main.ghostAIs)
+                    {
+                        Debug.Msg("Head", 1);
+                        Transform boneHead              = ghostAI.field_Public_Animator_0.GetBoneTransform(HumanBodyBones.Head) ?? null;
+                        Debug.Msg("Neck", 1);
+                        Transform boneNeck              = ghostAI.field_Public_Animator_0.GetBoneTransform(HumanBodyBones.Neck) ?? null;
+                        Debug.Msg("Spine", 1);
+                        Transform boneSpine             = ghostAI.field_Public_Animator_0.GetBoneTransform(HumanBodyBones.Spine) ?? null;
+                        Debug.Msg("UpperChest", 1);
+                        Transform boneUpperChest        = ghostAI.field_Public_Animator_0.GetBoneTransform(HumanBodyBones.UpperChest) ?? null;
+                        Debug.Msg("Chest", 1);
+                        Transform boneChest             = ghostAI.field_Public_Animator_0.GetBoneTransform(HumanBodyBones.Chest) ?? null;
+                        Vector3 bone1;
+                        Vector3 bone2;
+                        Vector3 bone3;
+                        Vector3 bone4;
+                        Vector3 bone5;
+
+
+
+                        if (boneHead != null)
+                        {
+                            bone1 = Main.cameraMain.WorldToScreenPoint(boneHead.position);
+                        }
+                        else
+                        {
+                            bone1 = new Vector3(0, 0, 0);
+                        }
+                            
+                        if (boneNeck != null)
+                        {
+                            bone2 = Main.cameraMain.WorldToScreenPoint(boneNeck.position);
+                        }
+                        else
+                        {
+                            bone2 = new Vector3(0, 0, 0);
+                        }
+
+                        if (boneSpine != null)
+                        {
+                            bone3 = Main.cameraMain.WorldToScreenPoint(boneSpine.position);
+                        }
+                        else
+                        {
+                            bone3 = new Vector3(0, 0, 0);
+                        }
+
+                        if (boneUpperChest != null)
+                        {
+                            bone4 = Main.cameraMain.WorldToScreenPoint(boneUpperChest.position);
+                        }
+                        else
+                        {
+                            bone4 = new Vector3(0, 0, 0);
+                        }
+
+                        if (boneChest != null)
+                        {
+                            bone5 = Main.cameraMain.WorldToScreenPoint(boneChest.position);
+                        }
+                        else
+                        {
+                            bone5 = new Vector3(0, 0, 0);
+                        }
+
+                        if (bone1.z < 0)
+                            continue;
+
+                        if(bone1.x != 0 && bone2.x != 0)
+                            Drawing.DrawLine(new Vector2(bone1.x, (float)Screen.height - bone1.y), new Vector2(bone2.x, (float)Screen.height - bone2.y), Color.green, 2f);
+                        if (bone2.x != 0 && bone3.x != 0)
+                            Drawing.DrawLine(new Vector2(bone2.x, (float)Screen.height - bone2.y), new Vector2(bone3.x, (float)Screen.height - bone3.y), Color.red, 2f);
+                        if (bone3.x != 0 && bone4.x != 0)
+                            Drawing.DrawLine(new Vector2(bone3.x, (float)Screen.height - bone3.y), new Vector2(bone3.x, (float)Screen.height - bone4.y), Color.blue, 2f);
+                        if (bone4.x != 0 && bone5.x != 0)
+                            Drawing.DrawLine(new Vector2(bone4.x, (float)Screen.height - bone4.y), new Vector2(bone5.x, (float)Screen.height - bone5.y), Color.cyan, 2f);
+                        //Drawing.DrawLine(new Vector2(bone1.x, (float)Screen.height - bone1.y), new Vector2(bone2.x, (float)Screen.height - bone2.y), Color.green, 2f);
+                    }
+                }*/
 
                 if (CheatToggles.enableEspPlayer == true && Main.gameController != null && Main.players != null && Main.players.Count > 1)
                 {
