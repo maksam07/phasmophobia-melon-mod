@@ -28,6 +28,7 @@ namespace C4PhasMod
         {
             if (initializedScene == 1)
             {
+                Debug.Msg("Game Started...", 1);
                 gameStarted = true;
             }
         }
@@ -46,6 +47,7 @@ namespace C4PhasMod
                     {
                         if (!isRunning)
                         {
+                            isRunning = true;
                             coRoutine = MelonCoroutines.Start(CollectGameObjects());
                         }
                         Thread.Sleep(5000);
@@ -63,6 +65,7 @@ namespace C4PhasMod
                     {
                         if (!isRunning)
                         {
+                            isRunning = true;
                             coRoutine = MelonCoroutines.Start(CollectPlayerObjects());
                         }
                         Thread.Sleep(5000);
@@ -100,8 +103,6 @@ namespace C4PhasMod
                 }
                 Debug.Msg("Basic informations: Toggled " + (CheatToggles.enableBI ? "On" : "Off"), 1);
             }
-
-
 
             if (keyboard.upArrowKey.wasPressedThisFrame)
             {
@@ -351,6 +352,11 @@ namespace C4PhasMod
                             Debug.Msg("Troll Hotkeys: Toggled " + (CheatToggles.enableHotkeys ? "On" : "Off"), 1);
                             MelonPreferences.SetEntryValue("Settings", "HotkeysEnabled", CheatToggles.enableHotkeys);
                         }
+                        if (GUI.Toggle(new Rect(650f, 62f, 150f, 20f), CheatToggles.enableInfStamina, "Infinite Stamina") != CheatToggles.enableInfStamina)
+                        {
+                            CheatToggles.enableInfStamina = !CheatToggles.enableInfStamina;
+                            Debug.Msg("Infinite Stamina: Toggled " + (CheatToggles.enableInfStamina ? "On" : "Off"), 1);
+                        }
                     }
                     if (GUI.Toggle(new Rect(500f, 62f, 150f, 20f), CheatToggles.guiTroll, "Troll GUI") != CheatToggles.guiTroll)
                     {
@@ -409,21 +415,25 @@ namespace C4PhasMod
                         {
                             CheatToggles.enableDebug = !CheatToggles.enableDebug;
                             Debug.Msg("Debug: Toggled " + (CheatToggles.enableDebug ? "On" : "Off"), 1);
+                            MelonPreferences.SetEntryValue<bool>("Settings", "DebugEnabled", CheatToggles.enableDebug);
                         }
                         if (GUI.Toggle(new Rect(650f, 22f, 150f, 20f), Debug.debugMode1, "Debug Mode 1") != Debug.debugMode1)
                         {
                             Debug.debugMode1 = !Debug.debugMode1;
                             Debug.Msg("Debug Mode 1: Toggled " + (Debug.debugMode1 ? "On" : "Off"), 1);
+                            MelonPreferences.SetEntryValue<bool>("Settings", "DebugM1Enabled", Debug.debugMode1);
                         }
                         if (GUI.Toggle(new Rect(650f, 42f, 150f, 20f), Debug.debugMode2, "Debug Mode 2") != Debug.debugMode2)
                         {
                             Debug.debugMode2 = !Debug.debugMode2;
                             Debug.Msg("Debug Mode 2: Toggled " + (Debug.debugMode2 ? "On" : "Off"), 1);
+                            MelonPreferences.SetEntryValue<bool>("Settings", "DebugM2Enabled", Debug.debugMode2);
                         }
                         if (GUI.Toggle(new Rect(650f, 62f, 150f, 20f), Debug.debugMode3, "Debug Mode 3") != Debug.debugMode3)
                         {
                             Debug.debugMode3 = !Debug.debugMode3;
                             Debug.Msg("Debug Mode 3: Toggled " + (Debug.debugMode3 ? "On" : "Off"), 1);
+                            MelonPreferences.SetEntryValue<bool>("Settings", "DebugM3Enabled", Debug.debugMode3);
                         }
                     }
                     if (GUI.Toggle(new Rect(500f, 102f, 150f, 20f), CheatToggles.guiTest, "New Features") != CheatToggles.guiTest)
@@ -547,17 +557,6 @@ namespace C4PhasMod
                             Debug.Msg("Blinking Lights", 1);
                         }
                     }
-                    GUI.SetNextControlName("changeName");
-                    playerName = GUI.TextArea(new Rect(650f, 2f, 150f, 20f), playerName);
-                    if (GUI.Button(new Rect(800f, 2f, 150f, 20f), "Change Name"))
-                    {
-                        GUI.FocusControl("changeName");
-                        PhotonNetwork.NickName = playerName;
-                        Photon.Realtime.Player playerPR = PhotonNetwork.LocalPlayer;
-                        playerPR.nickName = playerName;
-                        playerPR.NickName = playerName;
-                        Debug.Msg("Set name: " + playerName, 1);
-                    }
                 }
                 else
                 {
@@ -581,21 +580,25 @@ namespace C4PhasMod
                             {
                                 CheatToggles.enableDebug = !CheatToggles.enableDebug;
                                 Debug.Msg("Debug: Toggled " + (CheatToggles.enableDebug ? "On" : "Off"), 1);
+                                MelonPreferences.SetEntryValue<bool>("Settings", "DebugEnabled", CheatToggles.enableDebug);
                             }
                             if (GUI.Toggle(new Rect(370f, 42f, 150f, 20f), Debug.debugMode1, "Debug Mode 1") != Debug.debugMode1)
                             {
                                 Debug.debugMode1 = !Debug.debugMode1;
                                 Debug.Msg("Debug Mode 1: Toggled " + (Debug.debugMode1 ? "On" : "Off"), 1);
+                                MelonPreferences.SetEntryValue<bool>("Settings", "DebugM1Enabled", Debug.debugMode1);
                             }
                             if (GUI.Toggle(new Rect(370f, 62f, 150f, 20f), Debug.debugMode2, "Debug Mode 2") != Debug.debugMode2)
                             {
                                 Debug.debugMode2 = !Debug.debugMode2;
                                 Debug.Msg("Debug Mode 2: Toggled " + (Debug.debugMode2 ? "On" : "Off"), 1);
+                                MelonPreferences.SetEntryValue<bool>("Settings", "DebugM2Enabled", Debug.debugMode2);
                             }
                             if (GUI.Toggle(new Rect(370f, 82f, 150f, 20f), Debug.debugMode3, "Debug Mode 3") != Debug.debugMode3)
                             {
                                 Debug.debugMode3 = !Debug.debugMode3;
                                 Debug.Msg("Debug Mode 3: Toggled " + (Debug.debugMode3 ? "On" : "Off"), 1);
+                                MelonPreferences.SetEntryValue<bool>("Settings", "DebugM3Enabled", Debug.debugMode3);
                             }
                         }
 
@@ -604,16 +607,7 @@ namespace C4PhasMod
                         if (GUI.Button(new Rect(800f, 2f, 150f, 20f), "Change Name"))
                         {
                             GUI.FocusControl("changeName");
-                            Debug.Msg("Set name: " + playerName, 1);
-                            PhotonNetwork.NickName = playerName;
-                            Player localPlayer = GetLocalPlayer();
-                            localPlayer.name = playerName;
-                            Photon.Realtime.Player playerPR = PhotonNetwork.LocalPlayer ?? null;
-                            if (playerPR != null)
-                            {
-                                playerPR.nickName = playerName;
-                                playerPR.NickName = playerName;
-                            }
+                            ChangeNickname(playerName);
                         }
                     }
                 }
@@ -659,6 +653,11 @@ namespace C4PhasMod
                 lightSwitchRunning = true;
                 blinkingLightsRoutine = MelonCoroutines.Start(BlinkingLights());
             }
+            if (CheatToggles.enableInfStamina)
+            {
+                myPlayer.field_Public_PlayerStamina_0.field_Protected_Boolean_1 = false;
+                myPlayer.field_Public_PlayerStamina_0.field_Protected_Single_1 = 3;
+             }
         }
 
         IEnumerator BlinkingLights()
@@ -680,6 +679,24 @@ namespace C4PhasMod
             yield return null;
         }
 
+        private void ChangeNickname(String playerName)
+        {
+            Debug.Msg("ChangeNickname: " + playerName, 1);
+            if (playerName.Length > 0)
+            {
+                Debug.Msg("Set name: " + playerName, 1);
+                PhotonNetwork.NickName = playerName;
+                Player localPlayer = GetLocalPlayer();
+                localPlayer.name = playerName;
+                Photon.Realtime.Player playerPR = PhotonNetwork.LocalPlayer ?? null;
+                if (playerPR != null)
+                {
+                    playerPR.nickName = playerName;
+                    playerPR.NickName = playerName;
+                }
+            }
+        }
+
         private void DisableAll()
         {
             Debug.Msg("DisableAll", 3);
@@ -698,6 +715,7 @@ namespace C4PhasMod
             CheatToggles.enableEspFuseBox = false;
 
             CheatToggles.enableFullbright = false;
+            CheatToggles.enableInfStamina = false;
             Fullbright.Disable();
 
             BasicInformations.DisableGhost();
@@ -706,19 +724,26 @@ namespace C4PhasMod
         private Player GetLocalPlayer()
         {
             Debug.Msg("GetLocalPlayer", 3);
-            if (players == null || players.Count == 0)
+            if (players == null)
             {
                 return null;
             }
-            if (players.Count == 1)
+            if (players != null)
             {
-                return players[0];
-            }
-            foreach (Player player in players)
-            {
-                if (player != null && player.field_Public_PhotonView_0 != null && player.field_Public_PhotonView_0.AmOwner)
+                if (players.Count == 0)
                 {
-                    return player;
+                    return null;
+                }
+                if (players.Count == 1)
+                {
+                    return players[0];
+                }
+                foreach (Player player in players)
+                {
+                    if (player != null && player.field_Public_PhotonView_0 != null && player.field_Public_PhotonView_0.AmOwner == true)
+                    {
+                        return player;
+                    }
                 }
             }
             return null;
@@ -727,6 +752,28 @@ namespace C4PhasMod
         private void HandleConfig()
         {
             MelonPreferences.Load();
+
+            Debug.Msg("Create Config!", 2);
+            MelonPreferences.CreateCategory("Settings", "Settings");
+            Debug.Msg("Create Category: Settings", 3);
+
+            MelonPreferences.CreateEntry("Settings", "HotkeysEnabled", true, "Hotkeys Enabled");
+            Debug.Msg("Create Entry: HotkeysEnabled", 3);
+
+            MelonPreferences.CreateEntry("Settings", "DebugEnabled", true, "Debug Enabled");
+            Debug.Msg("Create Entry: DebugEnabled", 3);
+
+            MelonPreferences.CreateEntry("Settings", "DebugM1Enabled", true, "Debug M1 Enabled");
+            Debug.Msg("Create Entry: Debug1Enabled", 3);
+
+            MelonPreferences.CreateEntry("Settings", "DebugM2Enabled", true, "Debug M2 Enabled");
+            Debug.Msg("Create Entry: Debug2Enabled", 3);
+
+            MelonPreferences.CreateEntry("Settings", "DebugM3Enabled", false, "Debug M3 Enabled");
+            Debug.Msg("Create Entry: Debug3Enabled", 3);
+
+            MelonPreferences.Save();
+
             settingsExist = MelonPreferences.HasEntry("Settings", "HotkeysEnabled");
             if (settingsExist)
             {
@@ -736,28 +783,6 @@ namespace C4PhasMod
                 Debug.debugMode2 = MelonPreferences.GetEntryValue<bool>("Settings", "DebugM2Enabled");
                 Debug.debugMode3 = MelonPreferences.GetEntryValue<bool>("Settings", "DebugM3Enabled");
             }
-            else
-            {
-                Debug.Msg("Create Config!", 2);
-                MelonPreferences.CreateCategory("Settings", "Settings");
-                Debug.Msg("Create Category: Settings", 2);
-
-                MelonPreferences.CreateEntry("Settings", "HotkeysEnabled", true, "Hotkeys Enabled");
-                Debug.Msg("Create Entry: HotkeysEnabled", 2);
-
-                MelonPreferences.CreateEntry("Settings", "DebugEnabled", true, "Debug Enabled");
-                Debug.Msg("Create Entry: DebugEnabled", 2);
-
-                MelonPreferences.CreateEntry("Settings", "DebugM1Enabled", true, "Debug M1 Enabled");
-                Debug.Msg("Create Entry: Debug1Enabled", 2);
-
-                MelonPreferences.CreateEntry("Settings", "DebugM2Enabled", true, "Debug M2 Enabled");
-                Debug.Msg("Create Entry: Debug2Enabled", 2);
-
-                MelonPreferences.CreateEntry("Settings", "DebugM3Enabled", false, "Debug M3 Enabled");
-                Debug.Msg("Create Entry: Debug3Enabled", 2);
-            }
-            MelonPreferences.Save();
         }
 
         IEnumerator CollectGameObjects()
@@ -910,6 +935,23 @@ namespace C4PhasMod
                     Debug.Msg("myPlayer", 3);
                     myPlayer = GetLocalPlayer() ?? player;
                     yield return new WaitForSeconds(0.15f);
+
+                    if (!nicknameChanged)
+                    {
+                        if (System.IO.File.Exists(System.IO.Directory.GetCurrentDirectory() + @"\nickname.txt"))
+                        {
+                            Debug.Msg("nickname.txt found...", 1);
+                            String nicknameTxt = System.IO.File.ReadLines(System.IO.Directory.GetCurrentDirectory() + @"\nickname.txt").First();
+                            Debug.Msg("ChangeNickname executing...", 1);
+                            ChangeNickname(nicknameTxt);
+                            nicknameChanged = true;
+                        }
+                        else
+                        {
+                            nicknameChanged = true;
+                        }
+                    }
+                    yield return new WaitForSeconds(0.15f);
                 }
 
                 isRunning = false;
@@ -928,43 +970,43 @@ namespace C4PhasMod
             }
         }
 
-        public static Transform boneTransform;
-        public static Camera cameraMain;
-        public static List<DNAEvidence> dnaEvidences;
-        public static List<Door> doors;
-        public static GameController gameController;
-        public static GhostAI ghostAI;
-        public static List<GhostAI> ghostAIs;
-        public static List<EMF> emf;
-        public static EMFData emfData;
-        public static FuseBox fuseBox;
-        public static GhostActivity ghostActivity;
-        public static GhostInteraction ghostInteraction;
-        public static GhostController ghostController;
-        public static GhostEventPlayer ghostEventPlayer;
-        public static GhostInfo ghostInfo;
-        public static List<InventoryItem> items;
-        public static LevelController levelController;
-        public static Light light;
-        public static LightSwitch lightSwitch;
-        public static List<LightSwitch> lightSwitches;
-        public static Player myPlayer;
-        public static List<OuijaBoard> ouijaBoards;
-        public static PhotonView photonView;
-        public static Player player;
-        public static List<Player> players;
-        public static LobbyManager lobbyManager;
-        public static Animator playerAnim;
-        public static PlayerStatsManager playerStatsManager;
-        public static ServerManager serverManager;
-        public static SoundController soundController;
-        public static List<Window> windows;
-        public static String ghostNameAge;
-        public static String ghostType;
-        public static String evidence;
-        public static String ghostState;
-        public static String ghostIsShy;
-        public static String myPlayerSanity;
+        public static Transform boneTransform = null;
+        public static Camera cameraMain = null;
+        public static List<DNAEvidence> dnaEvidences = null;
+        public static List<Door> doors = null;
+        public static GameController gameController = null;
+        public static GhostAI ghostAI = null;
+        public static List<GhostAI> ghostAIs = null;
+        public static List<EMF> emf = null;
+        public static EMFData emfData = null;
+        public static FuseBox fuseBox = null;
+        public static GhostActivity ghostActivity = null;
+        public static GhostInteraction ghostInteraction = null;
+        public static GhostController ghostController = null;
+        public static GhostEventPlayer ghostEventPlayer = null;
+        public static GhostInfo ghostInfo = null;
+        public static List<InventoryItem> items = null;
+        public static LevelController levelController = null;
+        public static Light light = null;
+        public static LightSwitch lightSwitch = null;
+        public static List<LightSwitch> lightSwitches = null;
+        public static Player myPlayer = null;
+        public static List<OuijaBoard> ouijaBoards = null;
+        public static PhotonView photonView = null;
+        public static Player player = null;
+        public static List<Player> players = null;
+        public static LobbyManager lobbyManager = null;
+        public static Animator playerAnim = null;
+        public static PlayerStatsManager playerStatsManager = null;
+        public static ServerManager serverManager = null;
+        public static SoundController soundController = null;
+        public static List<Window> windows = null;
+        public static String ghostNameAge = null;
+        public static String ghostType = null;
+        public static String evidence = null;
+        public static String ghostState = null;
+        public static String ghostIsShy = null;
+        public static String myPlayerSanity = null;
         public static String[] mapNames = { "Opening Scene", "Lobby", "Tanglewood Street", "Ridgeview Road House", "Edgefield Street House", "Asylum", "Brownstone High School", "Bleasdale Farmhouse", "Grafton Farmhouse", "Prison" };
         public static String inSight = "";
         public static bool settingsExist = false;
@@ -972,13 +1014,11 @@ namespace C4PhasMod
         private bool lightSwitchToggle = false;
         private bool lightSwitchRunning = false;
         private static bool gameStarted = false;
-        private static object coRoutine;
-        private static object blinkingLightsRoutine;
+        private static object coRoutine = null;
+        private static object blinkingLightsRoutine = null;
         private static bool canRun = true;
         private static bool isRunning = false;
-        private static String playerName;
-
-        public static ChallengesManager challengesManager;
-        public static int test = 0;
+        private static String playerName = null;
+        private static bool nicknameChanged = false;
     }
 }
