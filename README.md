@@ -48,11 +48,9 @@ U key: Unlock all exit doors
 
 
 # How to build
-1. [Install MelonLoader](https://melonwiki.xyz/#/README)
+1. [Install MelonLoader](https://melonwiki.xyz/#/README) (v0.4.3.0)
 2. Start the game without Mod, only with MelonLoader. ML will download stuff to handle the IL2CPP from Phasmophobia
-3. Modify `C4PhasmoMod.csproj` and edit all  
-```<Reference Include="Assembly-CSharp"><HintPath>**.dll</HintPath></Reference>```  
-to link to your Steams Phasmophobia directory
+3. Move the `Managed` folder and edit inside the project folder
 4. Compile (Release) and move the `bin\Release\C4PhasMod.dll` to the Mod folder inside your Phasmophobia directory
 
 This mod only works with an MelonLoader Bypass or the game will crash because of MelonLoader detection.
