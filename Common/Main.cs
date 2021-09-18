@@ -656,6 +656,7 @@ namespace C4PhasMod
             if (CheatToggles.enableInfStamina)
             {
                 myPlayer.field_Public_PlayerStamina_0.field_Protected_Boolean_1 = false;
+                myPlayer.field_Public_PlayerStamina_0.field_Protected_Single_1 = 3;
             }
         }
 
