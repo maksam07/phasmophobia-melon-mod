@@ -655,21 +655,7 @@ namespace C4PhasMod
             }
             if (CheatToggles.enableInfStamina)
             {
-                //myPlayer.field_Public_PlayerStamina_0.field_Private_Single_0 = 5;           // max recover
-                //myPlayer.field_Public_PlayerStamina_0.field_Private_Single_1 = 0;           // recovering
-                myPlayer.field_Public_PlayerStamina_0.field_Protected_Boolean_1 = false;    // sprint disabled
-                //myPlayer.field_Public_PlayerStamina_0.field_Protected_Boolean_2 = false;    // is recover
-                //myPlayer.field_Public_PlayerStamina_0.field_Protected_Single_0 = 3;         // max stamina
-                myPlayer.field_Public_PlayerStamina_0.field_Protected_Single_1 = 3;         // stamina
-
-                //GUI.Label(new Rect(10f, 400f, 300f, 50f), "<color=#00FF00><b>Single 0:</b> " + (myPlayer.field_Public_PlayerStamina_0.field_Private_Single_0.ToString() ?? "N/A") + "</color>");
-                //GUI.Label(new Rect(10f, 415f, 300f, 50f), "<color=#00FF00><b>Single 1:</b> " + (myPlayer.field_Public_PlayerStamina_0.field_Private_Single_1.ToString() ?? "N/A") + "</color>");
-                //GUI.Label(new Rect(10f, 430f, 300f, 50f), "<color=#00FF00><b>Boolean 0:</b> " + (myPlayer.field_Public_PlayerStamina_0.field_Protected_Boolean_0.ToString() ?? "N/A") + "</color>");
-                //GUI.Label(new Rect(10f, 445f, 300f, 50f), "<color=#00FF00><b>Boolean 1:</b> " + (myPlayer.field_Public_PlayerStamina_0.field_Protected_Boolean_1.ToString() ?? "N/A") + "</color>");
-                //GUI.Label(new Rect(10f, 460f, 300f, 50f), "<color=#00FF00><b>Boolean 2:</b> " + (myPlayer.field_Public_PlayerStamina_0.field_Protected_Boolean_2.ToString() ?? "N/A") + "</color>");
-                //GUI.Label(new Rect(10f, 475f, 300f, 50f), "<color=#00FF00><b>Single 0:</b> " + (myPlayer.field_Public_PlayerStamina_0.field_Protected_Single_0.ToString() ?? "N/A") + "</color>");
-                //GUI.Label(new Rect(10f, 490f, 300f, 50f), "<color=#00FF00><b>Single 1:</b> " + (myPlayer.field_Public_PlayerStamina_0.field_Protected_Single_1.ToString() ?? "N/A") + "</color>");
-                //GUI.Label(new Rect(10f, 505f, 300f, 50f), "<color=#00FF00><b>Single 2:</b> " + (myPlayer.field_Public_PlayerStamina_0.field_Protected_Single_2.ToString() ?? "N/A") + "</color>");
+                myPlayer.field_Public_PlayerStamina_0.field_Protected_Boolean_1 = false;
             }
         }
 
