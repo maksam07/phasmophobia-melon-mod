@@ -1,5 +1,7 @@
 ﻿# Phasmophobia MelonLoader Mod  
-Only works with a [bypass](https://github.com/Cr4nkSt4r/PhasBypass) 
+Only works with a [bypass](https://github.com/Cr4nkSt4r/PhasBypass)  
+This mod is discontinued and only receives crucial updates.  
+Useful pull requests will be accepted.
 
 Just a private project to learn some basic programming of Unity Engine Mods with the help of MelonLoader.  
 Place the generated DLL into the MelonLoader Mods folder.   
