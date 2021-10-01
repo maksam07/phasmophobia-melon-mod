@@ -135,9 +135,6 @@ namespace C4PhasMod
                         case GhostAI.EnumNPublicSealedvaidwahufalidothfuapUnique.flicker:
                             Main.ghostState = "Flicker";
                             break;
-                        case GhostAI.EnumNPublicSealedvaidwahufalidothfuapUnique.lockDoor:
-                            Main.ghostState = "Lock Door";
-                            break;
                         case GhostAI.EnumNPublicSealedvaidwahufalidothfuapUnique.cctv:
                             Main.ghostState = "CCTV";
                             break;
