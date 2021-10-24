@@ -9,16 +9,17 @@ Place the generated DLL into the MelonLoader Mods folder.
 
 **Features**  
 \- Simple Box ESP  
+\- Ghost Bone(Point) ESP  
 \- Bone/OuijaBoard/FuseBox/EMF ESP  
+\- Show Ghost ESP function  
 \- Fullbright mode  
 \- Basic ghost informations (Ghost Name/Type/State, responds to)  
 \- Revealed evidence  
 \- Own sanity  
 \- Show active and completed missions  
 \- Console window for logging (MelonLoader)  
-\- Ghost actions: Hunt/Idle/Appear/Disappear/Interact  
-\- Blinking and turn on/off lights
-\- Add/Remove XP/Money   
+\- Ghost actions: Idle/Appear/Disappear/Interact  
+\- Blinking and turn on/off lights  
 \- Close+Lock/Open+Unlock Exit/All doors  
 \- Change player name
 
@@ -37,6 +38,7 @@ U key: Unlock all exit doors
 
 
 **Screenshots**  
+\- [Mod v.11.1.0](Images/v11.1.0.jpg)  
 \- [Mod v.7.2](Images/v7.2.png)  
 \- [Mod v.7.0](Images/v7.0_HAC-Edition.jpg)  
 \- [Mod v.6.1](Images/v6.1.png)  
