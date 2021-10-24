@@ -1,4 +1,4 @@
-﻿# Phasmophobia MelonLoader Mod  
+﻿# Phasmophobia MelonLoader Mod (Discontinued/Only crucial updates)  
 Only works with a [bypass](https://github.com/Cr4nkSt4r/PhasBypass)  
 This mod is discontinued and only receives crucial updates.  
 Useful pull requests will be accepted.
