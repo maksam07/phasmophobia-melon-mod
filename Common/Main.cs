@@ -263,35 +263,40 @@ namespace C4PhasMod
                             CheatToggles.enableEspGhost = !CheatToggles.enableEspGhost;
                             Debug.Msg("Ghost ESP: Toggled " + (CheatToggles.enableEspGhost ? "On" : "Off"), 1);
                         }
-                        if (GUI.Toggle(new Rect(650f, 22f, 150f, 20f), CheatToggles.enableEspGhostBone, "Ghost Bone ESP") != CheatToggles.enableEspGhostBone)
+                        if (GUI.Toggle(new Rect(650f, 22f, 150f, 20f), CheatToggles.enableEspGhostVisible, "Ghost Visible") != CheatToggles.enableEspGhostVisible)
+                        {
+                            CheatToggles.enableEspGhostVisible = !CheatToggles.enableEspGhostVisible;
+                            Debug.Msg("Ghost Visible: Toggled " + (CheatToggles.enableEspGhostVisible ? "On" : "Off"), 1);
+                        }
+                        if (GUI.Toggle(new Rect(650f, 42f, 150f, 20f), CheatToggles.enableEspGhostBone, "Ghost Bone ESP") != CheatToggles.enableEspGhostBone)
                         {
                             CheatToggles.enableEspGhostBone = !CheatToggles.enableEspGhostBone;
                             Debug.Msg("Ghost Bone ESP: Toggled " + (CheatToggles.enableEspGhostBone ? "On" : "Off"), 1);
                         }
-                        if (GUI.Toggle(new Rect(650f, 42f, 150f, 20f), CheatToggles.enableEspPlayer, "Player ESP") != CheatToggles.enableEspPlayer)
+                        if (GUI.Toggle(new Rect(650f, 62f, 150f, 20f), CheatToggles.enableEspPlayer, "Player ESP") != CheatToggles.enableEspPlayer)
                         {
                             CheatToggles.enableEspPlayer = !CheatToggles.enableEspPlayer;
                             Debug.Msg("Player ESP: Toggled " + (CheatToggles.enableEspPlayer ? "On" : "Off"), 1);
 
                         }
-                        if (GUI.Toggle(new Rect(650f, 62f, 150f, 20f), CheatToggles.enableEspBone, "Bone ESP") != CheatToggles.enableEspBone)
+                        if (GUI.Toggle(new Rect(650f, 82f, 150f, 20f), CheatToggles.enableEspBone, "Bone ESP") != CheatToggles.enableEspBone)
                         {
                             CheatToggles.enableEspBone = !CheatToggles.enableEspBone;
                             Debug.Msg("Bone ESP: Toggled " + (CheatToggles.enableEspBone ? "On" : "Off"), 1);
 
                         }
-                        if (GUI.Toggle(new Rect(650f, 82f, 150f, 20f), CheatToggles.enableEspOuija, "Ouija ESP") != CheatToggles.enableEspOuija)
+                        if (GUI.Toggle(new Rect(650f, 102f, 150f, 20f), CheatToggles.enableEspOuija, "Ouija ESP") != CheatToggles.enableEspOuija)
                         {
                             CheatToggles.enableEspOuija = !CheatToggles.enableEspOuija;
                             Debug.Msg("Ouija ESP: Toggled " + (CheatToggles.enableEspOuija ? "On" : "Off"), 1);
 
                         }
-                        if (GUI.Toggle(new Rect(650f, 102f, 150f, 20f), CheatToggles.enableEspFuseBox, "FuseBox ESP") != CheatToggles.enableEspFuseBox)
+                        if (GUI.Toggle(new Rect(650f, 122f, 150f, 20f), CheatToggles.enableEspFuseBox, "FuseBox ESP") != CheatToggles.enableEspFuseBox)
                         {
                             CheatToggles.enableEspFuseBox = !CheatToggles.enableEspFuseBox;
                             Debug.Msg("FuseBox ESP: Toggled " + (CheatToggles.enableEspFuseBox ? "On" : "Off"), 1);
                         }
-                        if (GUI.Toggle(new Rect(650f, 122f, 150f, 20f), CheatToggles.enableEspEmf, "Emf ESP") != CheatToggles.enableEspEmf)
+                        if (GUI.Toggle(new Rect(650f, 142f, 150f, 20f), CheatToggles.enableEspEmf, "Emf ESP") != CheatToggles.enableEspEmf)
                         {
                             CheatToggles.enableEspEmf = !CheatToggles.enableEspEmf;
                             Debug.Msg("Emf ESP: Toggled " + (CheatToggles.enableEspEmf ? "On" : "Off"), 1);
@@ -613,7 +618,7 @@ namespace C4PhasMod
                 }
             }
 
-            if (CheatToggles.enableEspGhost || CheatToggles.enableEspPlayer || CheatToggles.enableEspBone || CheatToggles.enableEspOuija || CheatToggles.enableEspEmf || CheatToggles.enableEspFuseBox)
+            if (CheatToggles.enableEspGhost || CheatToggles.enableEspGhostVisible || CheatToggles.enableEspGhostBone ||CheatToggles.enableEspPlayer || CheatToggles.enableEspBone || CheatToggles.enableEspOuija || CheatToggles.enableEspEmf || CheatToggles.enableEspFuseBox)
             {
                 ESP.Enable();
             }
@@ -708,6 +713,7 @@ namespace C4PhasMod
             CheatToggles.enableEsp = false;
             CheatToggles.enableEspGhost = false;
             CheatToggles.enableEspGhostBone = false;
+            CheatToggles.enableEspGhostVisible = false;
             CheatToggles.enableEspPlayer = false;
             CheatToggles.enableEspBone = false;
             CheatToggles.enableEspOuija = false;
@@ -1007,7 +1013,7 @@ namespace C4PhasMod
         public static String ghostState = null;
         public static String ghostIsShy = null;
         public static String myPlayerSanity = null;
-        public static String[] mapNames = { "Opening Scene", "Lobby", "Tanglewood Street", "Ridgeview Road House", "Edgefield Street House", "Asylum", "Brownstone High School", "Bleasdale Farmhouse", "Grafton Farmhouse", "Prison" };
+        public static String[] mapNames = { "Opening Scene", "Lobby", "Tanglewood Street", "Ridgeview Road House", "Edgefield Street House", "Asylum", "Brownstone High School", "Bleasdale Farmhouse", "Grafton Farmhouse", "Prison", "Willow Street House" };
         public static String inSight = "";
         public static bool settingsExist = false;
         public static int initializedScene;

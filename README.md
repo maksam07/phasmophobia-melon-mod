@@ -64,7 +64,7 @@ This mod only works with an MelonLoader Bypass or the game will crash because of
 # Credits
 **Fullbright:** `ShieldSupporter` for sharing the code from `Plagues`  
 **2D Box ESP idea:** `EBro912`  
-**Others:** `HYPExMon5ter`, `tecnocat`, `Jbosh123`, `Martin951`, `Unk0wnV3rm`  
+**Others:** `HYPExMon5ter`, `tecnocat`, `Jbosh123`, `Martin951`, `Unk0wnV3rm`, `wh0am15533`  
 
 
 # License
