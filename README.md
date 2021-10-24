@@ -5,6 +5,9 @@ Useful pull requests will be accepted.
 
 Just a private project to learn some basic programming of Unity Engine Mods with the help of MelonLoader.  
 Place the generated DLL into the MelonLoader Mods folder.   
+  
+**Disclaimer:** The Bone(Point) ESP was implemented just for testing purposes, so code wise, it's a mess.  
+I stripped some unneeded parts but the arrays in this stage, aren't necessary. So a little bit more "processing" is happening.  
 
 
 **Features**  
