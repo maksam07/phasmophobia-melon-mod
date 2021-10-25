@@ -24,13 +24,13 @@ namespace C4PhasMod
             //Main.ghostAI.ChasingPlayer(true); Method_Public_Void_Boolean_0 Method_Public_Void_Boolean_1
             Main.ghostAI.field_Public_Animator_0.SetBool("isIdle", false);
             Main.ghostAI.field_Public_Animator_0.SetInteger("WalkType", 1);
-            Main.ghostAI.field_Public_GhostAudio_0.TurnOnOrOffAppearSource(true);
+            Main.ghostAI.field_Public_GhostAudio_0.TurnOnOrOffAppearSource(true, true);
             Main.ghostAI.field_Public_GhostAudio_0.PlayOrStopAppearSource(true);
             Main.ghostAI.field_Public_NavMeshAgent_0.speed = Main.ghostAI.field_Public_Single_0;
             Main.ghostAI.field_Public_NavMeshAgent_0.SetDestination(getDestination());
             Main.ghostAI.ChangeState(GhostAI.EnumNPublicSealedvaidwahufalidothfuapUnique.hunting, null, null);
             Main.ghostAI.field_Public_GhostInteraction_0.CreateAppearedEMF(Main.ghostAI.transform.position);
-            Main.ghostAI.Appear(true);
+            Main.ghostAI.Appear();
             PhotonView photonView = Main.ghostAI.field_Public_PhotonView_0;
             photonView.RPC("Hunting", RpcTarget.All, getRPCObject(1, true));
             photonView.RPC("SyncChasingPlayer", RpcTarget.All, getRPCObject(1, true));
@@ -42,11 +42,11 @@ namespace C4PhasMod
             Main.ghostAI.field_Public_Player_0 = null;
             Main.ghostAI.field_Public_Animator_0.SetInteger("IdleNumber", Random.Range(0, 2));
             Main.ghostAI.field_Public_Animator_0.SetBool("isIdle", true);
-            Main.ghostAI.field_Public_GhostAudio_0.TurnOnOrOffAppearSource(false);
+            Main.ghostAI.field_Public_GhostAudio_0.TurnOnOrOffAppearSource(false,false);
             Main.ghostAI.field_Public_GhostAudio_0.PlayOrStopAppearSource(false);
             //Main.ghostAI.ChasingPlayer(false);
             Main.ghostAI.StopGhostFromHunting();
-            Main.ghostAI.UnAppear(false);
+            Main.ghostAI.UnAppear();
             Main.ghostAI.ChangeState(GhostAI.EnumNPublicSealedvaidwahufalidothfuapUnique.idle, null, null);
             PhotonView photonView = Main.ghostAI.field_Public_PhotonView_0;
             photonView.RPC("Hunting", RpcTarget.All, getRPCObject(1, false));
@@ -70,9 +70,9 @@ namespace C4PhasMod
         public static void Interact()
         {
             Debug.Msg("Troll->Interact: Triggered", 1);
-            Main.ghostAI.RandomEvent();
+            //Main.ghostAI.RandomEvent();
             Main.ghostActivity.Interact();
-            Main.ghostAI.field_Public_GhostActivity_0.InteractWithARandomProp();
+            //Main.ghostAI.field_Public_GhostActivity_0.InteractWithARandomProp();
             Main.ghostAI.field_Public_GhostActivity_0.Interact();
         }
 
@@ -139,7 +139,7 @@ namespace C4PhasMod
             Debug.Msg("CloseLockDoor", 3);
             PhotonView photonView = door.field_Public_PhotonView_0;
             door.DisableOrEnableDoor(false);
-            door.LockDoor();
+            door.LockDoor(true);
             door.transform.localRotation = Quaternion.identity;
             Quaternion localRotation = door.transform.localRotation;
             Vector3 eulerAngles = localRotation.eulerAngles;

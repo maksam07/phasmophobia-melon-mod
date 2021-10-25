@@ -28,18 +28,28 @@ namespace C4PhasMod
 
                 if (CheatToggles.enableEspGhostVisible == true && Main.gameController != null && Main.ghostAI != null)
                 {
-                    Main.ghostAI.Appear(false);
+                    try
+                    {
+                        Main.ghostAI.Appear(Main.GetLocalPlayer());
+                    }
+                    catch (System.Exception e)
+                    {
+                        Debug.Msg("Exception: " + e, 3);
+                    }
+
                     Main.ghostAI.field_Public_SanityDrainer_0.enabled = false;
                     //Code from wh0am15533 (https://www.unknowncheats.me/forum/members/2860743.html)
-                    if (Main.ghostAI.ghostParticle != null)
+                    if (Main.ghostAI.field_Public_Animator_0 != null)
                     {
-                        Main.ghostAI.ghostParticle.GetComponent<ParticleSystemRenderer>().enabled = true;
+                        ParticleSystemRenderer psRenderer = Main.ghostAI.field_Public_Animator_0.GetComponent<ParticleSystemRenderer>() ?? null;
+                        if (psRenderer != null) psRenderer.enabled = true;
                     }
                 }
 
                 if (CheatToggles.enableEspGhostBone && Main.gameController != null && Main.ghostAI != null)
                 {
-                    ESP.ProcessBones();
+                    ESP.ProcessBones(Main.ghostAI.field_Public_Animator_0);
+                    if (CheatToggles.enableEspGhostFinger) ESP.ProcessFingers(Main.ghostAI.field_Public_Animator_0);
 
                     /* DEBUGGING CODE */
                     //GUIStyle guiStyle = new GUIStyle();
@@ -60,7 +70,8 @@ namespace C4PhasMod
                     //                bonesPos = Main.cameraMain.WorldToScreenPoint(bonesTrans.position);
                     //                if (bonesPos.z < 0)
                     //                    break;
-                    //                GUI.DrawTexture(new Rect(bonesPos.x, (float)Screen.height - bonesPos.y, 5, 5), Texture2D.whiteTexture, ScaleMode.StretchToFill);
+                    //                GUI.DrawTexture(new Rect(bonesPos.x, Screen.height - bonesPos.y, 5, 5), Texture2D.whiteTexture, ScaleMode.StretchToFill);
+                    //                GUI.Label(new Rect(new Vector2(bonesPos.x, Screen.height - bonesPos.y), new Vector2(100f, 100f)), i.ToString());
                     //            }
                     //        }
                     //        catch (System.Exception e)
@@ -93,6 +104,14 @@ namespace C4PhasMod
 
                         Drawing.DrawBoxOutline(new Vector2(w2s.x - (boxWidth / 2f), playerNeckMid), boxWidth, boxHeight, Color.green);
                         GUI.Label(new Rect(new Vector2(w2s.x, Screen.height - (w2s.y + 1f)), new Vector2(100f, 100f)), player.field_Public_PhotonView_0.Owner.NickName);
+                    }
+                }
+
+                if (CheatToggles.enableEspPlayerBone == true && Main.gameController != null && Main.players != null && Main.players.Count > 1)
+                {
+                    foreach (Player player in Main.players)
+                    {
+                        ESP.ProcessBones(player.field_Public_Animator_0);
                     }
                 }
 
@@ -162,7 +181,7 @@ namespace C4PhasMod
             }
         }
 
-        private static void ProcessBones()
+        private static void ProcessBones(Animator boneSource)
         {
             GUIStyle guiStyle = new GUIStyle();
             GUI.color = Color.cyan;
@@ -207,18 +226,18 @@ namespace C4PhasMod
                     i++;
                     continue;
                 }
-                Vector3 bonePos = ESP.getBonePos(boneToDraw);
+                Vector3 bonePos = ESP.getBonePos(boneToDraw, boneSource);
                 if (bonePos.z < 0)
-                    break;
+                    continue;
 
                 if (boneToDraw == HumanBodyBones.Head)
-                    GUI.DrawTexture(new Rect(bonePos.x-8f, (float)Screen.height - bonePos.y-15f, 16, 30), Texture2D.whiteTexture, ScaleMode.StretchToFill);
+                    GUI.DrawTexture(new Rect(bonePos.x - 8f, (float)Screen.height - bonePos.y - 15f, 16, 30), Texture2D.whiteTexture, ScaleMode.StretchToFill);
                 else
-                    GUI.DrawTexture(new Rect(bonePos.x-2.5f, (float)Screen.height - bonePos.y - 2.5f, 5, 5), Texture2D.whiteTexture, ScaleMode.StretchToFill);
+                    GUI.DrawTexture(new Rect(bonePos.x - 2.5f, (float)Screen.height - bonePos.y - 2.5f, 5, 5), Texture2D.whiteTexture, ScaleMode.StretchToFill);
 
                 if (i + 1 <= 25 && bonesToDraw[i + 1] != HumanBodyBones.LastBone)
                 {
-                    Vector3 nextBone = ESP.getBonePos(bonesToDraw[i + 1]);
+                    Vector3 nextBone = ESP.getBonePos(bonesToDraw[i + 1], boneSource);
 
                     if (bonePos.x != 0 && nextBone.x != 0)
                         Drawing.DrawLine(new Vector2(bonePos.x, (float)Screen.height - bonePos.y), new Vector2(nextBone.x, (float)Screen.height - nextBone.y), Color.cyan, 2);
@@ -227,12 +246,100 @@ namespace C4PhasMod
             }
         }
 
-        private static Vector3 getBonePos(HumanBodyBones bone)
+        private static void ProcessFingers(Animator boneSource)
+        {
+            GUIStyle guiStyle = new GUIStyle();
+            GUI.color = Color.cyan;
+            guiStyle.fontSize = 15; guiStyle.normal.textColor = Color.cyan;
+
+            HumanBodyBones[] bonesToDraw =
+            {
+                HumanBodyBones.RightHand,
+                HumanBodyBones.RightThumbProximal,
+                HumanBodyBones.RightThumbIntermediate,
+                HumanBodyBones.RightThumbDistal,
+                HumanBodyBones.LastBone,
+                HumanBodyBones.RightHand,
+                HumanBodyBones.RightIndexProximal,
+                HumanBodyBones.RightIndexIntermediate,
+                HumanBodyBones.RightIndexDistal,
+                HumanBodyBones.LastBone,
+                HumanBodyBones.RightHand,
+                HumanBodyBones.RightMiddleProximal,
+                HumanBodyBones.RightMiddleIntermediate,
+                HumanBodyBones.RightMiddleDistal,
+                HumanBodyBones.LastBone,
+                HumanBodyBones.RightHand,
+                HumanBodyBones.RightRingProximal,
+                HumanBodyBones.RightRingIntermediate,
+                HumanBodyBones.RightRingDistal,
+                HumanBodyBones.LastBone,
+                HumanBodyBones.RightHand,
+                HumanBodyBones.RightLittleProximal,
+                HumanBodyBones.RightLittleIntermediate,
+                HumanBodyBones.RightLittleDistal,
+                HumanBodyBones.LastBone,
+                HumanBodyBones.LeftHand,
+                HumanBodyBones.LeftThumbProximal,
+                HumanBodyBones.LeftThumbIntermediate,
+                HumanBodyBones.LeftThumbDistal,
+                HumanBodyBones.LastBone,
+                HumanBodyBones.LeftHand,
+                HumanBodyBones.LeftIndexProximal,
+                HumanBodyBones.LeftIndexIntermediate,
+                HumanBodyBones.LeftIndexDistal,
+                HumanBodyBones.LastBone,
+                HumanBodyBones.LeftHand,
+                HumanBodyBones.LeftMiddleProximal,
+                HumanBodyBones.LeftMiddleIntermediate,
+                HumanBodyBones.LeftMiddleDistal,
+                HumanBodyBones.LastBone,
+                HumanBodyBones.LeftHand,
+                HumanBodyBones.LeftRingProximal,
+                HumanBodyBones.LeftRingIntermediate,
+                HumanBodyBones.LeftRingDistal,
+                HumanBodyBones.LastBone,
+                HumanBodyBones.LeftHand,
+                HumanBodyBones.LeftLittleProximal,
+                HumanBodyBones.LeftLittleIntermediate,
+                HumanBodyBones.LeftLittleDistal,
+                HumanBodyBones.LastBone
+            };
+
+            int i = 0;
+            foreach (HumanBodyBones boneToDraw in bonesToDraw)
+            {
+                if (boneToDraw == HumanBodyBones.LastBone)
+                {
+                    i++;
+                    continue;
+                }
+                Vector3 bonePos = ESP.getBonePos(boneToDraw, boneSource);
+                if (bonePos.z < 0)
+                    continue;
+
+                if (boneToDraw == HumanBodyBones.Head)
+                    GUI.DrawTexture(new Rect(bonePos.x - 8f, (float)Screen.height - bonePos.y - 15f, 16, 30), Texture2D.whiteTexture, ScaleMode.StretchToFill);
+                else
+                    GUI.DrawTexture(new Rect(bonePos.x - 2.5f, (float)Screen.height - bonePos.y - 2.5f, 5, 5), Texture2D.whiteTexture, ScaleMode.StretchToFill);
+
+                if (i + 1 <= 25 && bonesToDraw[i + 1] != HumanBodyBones.LastBone)
+                {
+                    Vector3 nextBone = ESP.getBonePos(bonesToDraw[i + 1], boneSource);
+
+                    if (bonePos.x != 0 && nextBone.x != 0)
+                        Drawing.DrawLine(new Vector2(bonePos.x, (float)Screen.height - bonePos.y), new Vector2(nextBone.x, (float)Screen.height - nextBone.y), Color.cyan, 2);
+                }
+                i++;
+            }
+        }
+
+        private static Vector3 getBonePos(HumanBodyBones bone, Animator boneSource)
         {
             Transform boneTransf = null;
             try
             {
-                boneTransf = Main.ghostAI.field_Public_Animator_0.GetBoneTransform(bone);
+                boneTransf = boneSource.GetBoneTransform(bone);
             }
             catch (System.Exception e)
             {
