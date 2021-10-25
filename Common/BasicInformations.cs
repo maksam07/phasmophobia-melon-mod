@@ -12,66 +12,78 @@ namespace C4PhasMod
                 if (Main.levelController != null && Main.ghostInfo != null && firstRun && CheatToggles.enableBIGhost)
                 {
                     Debug.Msg("ghostNameAge", 3);
-                    if (Main.ghostInfo.field_Public_ValueTypePublicSealedObInBoStInBoInBoInInUnique_0.field_Public_String_0 != "" && Main.ghostInfo.field_Public_ValueTypePublicSealedObInBoStInBoInBoInInUnique_0.field_Public_Int32_0 > 0)
-                        Main.ghostNameAge = Main.ghostInfo.field_Public_ValueTypePublicSealedObInBoStInBoInBoInInUnique_0.field_Public_String_0 + " - " + Main.ghostInfo.field_Public_ValueTypePublicSealedObInBoStInBoInBoInInUnique_0.field_Public_Int32_0.ToString();
+                    if (Main.ghostInfo.field_Public_ValueTypePublicSealedObLi1InObBoStInBoInUnique_0.field_Public_String_0 != "" && Main.ghostInfo.field_Public_ValueTypePublicSealedObLi1InObBoStInBoInUnique_0.field_Public_Int32_0 > 0)
+                        Main.ghostNameAge = Main.ghostInfo.field_Public_ValueTypePublicSealedObLi1InObBoStInBoInUnique_0.field_Public_String_0 + " - " + Main.ghostInfo.field_Public_ValueTypePublicSealedObLi1InObBoStInBoInUnique_0.field_Public_Int32_0.ToString();
                     
                     Debug.Msg("ghostType", 3);
-                    if (Main.ghostInfo.field_Public_ValueTypePublicSealedObInBoStInBoInBoInInUnique_0.field_Public_EnumNPublicSealedvaSpWrPhPoBaJiMaReShUnique_0.ToString() != "none")
-                        Main.ghostType = Main.ghostInfo.field_Public_ValueTypePublicSealedObInBoStInBoInBoInInUnique_0.field_Public_EnumNPublicSealedvaSpWrPhPoBaJiMaReShUnique_0.ToString();
+                    if (Main.ghostInfo.field_Public_ValueTypePublicSealedObLi1InObBoStInBoInUnique_0.field_Public_EnumNPublicSealedvaSpWrPhPoBaJiMaReShUnique_0.ToString() != "none")
+                        Main.ghostType = Main.ghostInfo.field_Public_ValueTypePublicSealedObLi1InObBoStInBoInUnique_0.field_Public_EnumNPublicSealedvaSpWrPhPoBaJiMaReShUnique_0.ToString();
                     
                     Debug.Msg("ghostIsShy", 3);
-                    Main.ghostIsShy = (Main.ghostInfo.field_Public_ValueTypePublicSealedObInBoStInBoInBoInInUnique_0.field_Public_Boolean_1 ? "People that are alone" : "Everyone");
+                    Main.ghostIsShy = (Main.ghostInfo.field_Public_ValueTypePublicSealedObLi1InObBoStInBoInUnique_0.field_Public_Boolean_1 ? "People that are alone" : "Everyone");
                     
                     Debug.Msg("evidence", 3);
-                    switch (Main.ghostInfo.field_Public_ValueTypePublicSealedObInBoStInBoInBoInInUnique_0.field_Public_EnumNPublicSealedvaSpWrPhPoBaJiMaReShUnique_0)
+                    switch (Main.ghostInfo.field_Public_ValueTypePublicSealedObLi1InObBoStInBoInUnique_0.field_Public_EnumNPublicSealedvaSpWrPhPoBaJiMaReShUnique_0)
                     {
-                        case ValueTypePublicSealedObInBoStInBoInBoInInUnique.EnumNPublicSealedvaSpWrPhPoBaJiMaReShUnique.Spirit:
+                        case ValueTypePublicSealedObLi1InObBoStInBoInUnique.EnumNPublicSealedvaSpWrPhPoBaJiMaReShUnique.Spirit:
                             Main.evidence = "EMF 5 | Spirit Box | Ghost Writing";
                             break;
-                        case ValueTypePublicSealedObInBoStInBoInBoInInUnique.EnumNPublicSealedvaSpWrPhPoBaJiMaReShUnique.Wraith:
+                        case ValueTypePublicSealedObLi1InObBoStInBoInUnique.EnumNPublicSealedvaSpWrPhPoBaJiMaReShUnique.Wraith:
                             Main.evidence = "EMF 5 | Spirit Box | DOTS Projector";
                             break;
-                        case ValueTypePublicSealedObInBoStInBoInBoInInUnique.EnumNPublicSealedvaSpWrPhPoBaJiMaReShUnique.Phantom:
+                        case ValueTypePublicSealedObLi1InObBoStInBoInUnique.EnumNPublicSealedvaSpWrPhPoBaJiMaReShUnique.Phantom:
                             Main.evidence = "Spirit Box | Fingerprints | DOTS Projector";
                             break;
-                        case ValueTypePublicSealedObInBoStInBoInBoInInUnique.EnumNPublicSealedvaSpWrPhPoBaJiMaReShUnique.Poltergeist:
+                        case ValueTypePublicSealedObLi1InObBoStInBoInUnique.EnumNPublicSealedvaSpWrPhPoBaJiMaReShUnique.Poltergeist:
                             Main.evidence = "Spirit Box | Fingerprints | Ghost Writing";
                             break;
-                        case ValueTypePublicSealedObInBoStInBoInBoInInUnique.EnumNPublicSealedvaSpWrPhPoBaJiMaReShUnique.Banshee:
+                        case ValueTypePublicSealedObLi1InObBoStInBoInUnique.EnumNPublicSealedvaSpWrPhPoBaJiMaReShUnique.Banshee:
                             Main.evidence = "Fingerprints | Ghost Orb | DOTS Projector";
                             break;
-                        case ValueTypePublicSealedObInBoStInBoInBoInInUnique.EnumNPublicSealedvaSpWrPhPoBaJiMaReShUnique.Jinn:
+                        case ValueTypePublicSealedObLi1InObBoStInBoInUnique.EnumNPublicSealedvaSpWrPhPoBaJiMaReShUnique.Jinn:
                             Main.evidence = "EMF 5 | Fingerprints | Freezing Temperature";
                             break;
-                        case ValueTypePublicSealedObInBoStInBoInBoInInUnique.EnumNPublicSealedvaSpWrPhPoBaJiMaReShUnique.Mare:
+                        case ValueTypePublicSealedObLi1InObBoStInBoInUnique.EnumNPublicSealedvaSpWrPhPoBaJiMaReShUnique.Mare:
                             Main.evidence = "Spirit Box | Ghost Orb | Ghost Writing";
                             break;
-                        case ValueTypePublicSealedObInBoStInBoInBoInInUnique.EnumNPublicSealedvaSpWrPhPoBaJiMaReShUnique.Revenant:
+                        case ValueTypePublicSealedObLi1InObBoStInBoInUnique.EnumNPublicSealedvaSpWrPhPoBaJiMaReShUnique.Revenant:
                             Main.evidence = "Ghost Orb | Ghost Writing | Freezing Temperature";
                             break;
-                        case ValueTypePublicSealedObInBoStInBoInBoInInUnique.EnumNPublicSealedvaSpWrPhPoBaJiMaReShUnique.Shade:
+                        case ValueTypePublicSealedObLi1InObBoStInBoInUnique.EnumNPublicSealedvaSpWrPhPoBaJiMaReShUnique.Shade:
                             Main.evidence = "EMF 5 | Ghost Writing | Freezing Temperature";
                             break;
-                        case ValueTypePublicSealedObInBoStInBoInBoInInUnique.EnumNPublicSealedvaSpWrPhPoBaJiMaReShUnique.Demon:
+                        case ValueTypePublicSealedObLi1InObBoStInBoInUnique.EnumNPublicSealedvaSpWrPhPoBaJiMaReShUnique.Demon:
                             Main.evidence = "Fingerprints | Ghost Writing | Freezing Temperature";
                             break;
-                        case ValueTypePublicSealedObInBoStInBoInBoInInUnique.EnumNPublicSealedvaSpWrPhPoBaJiMaReShUnique.Yurei:
+                        case ValueTypePublicSealedObLi1InObBoStInBoInUnique.EnumNPublicSealedvaSpWrPhPoBaJiMaReShUnique.Yurei:
                             Main.evidence = "Ghost Orb | Freezing Temperature | DOTS Projector";
                             break;
-                        case ValueTypePublicSealedObInBoStInBoInBoInInUnique.EnumNPublicSealedvaSpWrPhPoBaJiMaReShUnique.Oni:
+                        case ValueTypePublicSealedObLi1InObBoStInBoInUnique.EnumNPublicSealedvaSpWrPhPoBaJiMaReShUnique.Oni:
                             Main.evidence = "EMF 5 | Freezing Temperature | DOTS Projector";
                             break;
-                        case ValueTypePublicSealedObInBoStInBoInBoInInUnique.EnumNPublicSealedvaSpWrPhPoBaJiMaReShUnique.Yokai:
+                        case ValueTypePublicSealedObLi1InObBoStInBoInUnique.EnumNPublicSealedvaSpWrPhPoBaJiMaReShUnique.Yokai:
                             Main.evidence = "Spirit Box | Ghost Orb | DOTS Projector";
                             break;
-                        case ValueTypePublicSealedObInBoStInBoInBoInInUnique.EnumNPublicSealedvaSpWrPhPoBaJiMaReShUnique.Hantu:
+                        case ValueTypePublicSealedObLi1InObBoStInBoInUnique.EnumNPublicSealedvaSpWrPhPoBaJiMaReShUnique.Hantu:
                             Main.evidence = "Fingerprint | Ghost Orb | Freezing Temperature";
                             break;
-                        case ValueTypePublicSealedObInBoStInBoInBoInInUnique.EnumNPublicSealedvaSpWrPhPoBaJiMaReShUnique.Goryo:
+                        case ValueTypePublicSealedObLi1InObBoStInBoInUnique.EnumNPublicSealedvaSpWrPhPoBaJiMaReShUnique.Goryo:
                             Main.evidence = "EMF 5 | Fingerprints | DOTS Projector";
                             break;
-                        case ValueTypePublicSealedObInBoStInBoInBoInInUnique.EnumNPublicSealedvaSpWrPhPoBaJiMaReShUnique.Myling:
+                        case ValueTypePublicSealedObLi1InObBoStInBoInUnique.EnumNPublicSealedvaSpWrPhPoBaJiMaReShUnique.Myling:
                             Main.evidence = "EMF 5 | Fingerprints | Ghost Writing";
+                            break;
+                        case ValueTypePublicSealedObLi1InObBoStInBoInUnique.EnumNPublicSealedvaSpWrPhPoBaJiMaReShUnique.Onryo:
+                            Main.evidence = "Spirit Box | Ghost Orb | Freezing Temperature";
+                            break;
+                        case ValueTypePublicSealedObLi1InObBoStInBoInUnique.EnumNPublicSealedvaSpWrPhPoBaJiMaReShUnique.TheTwins:
+                            Main.evidence = "EMF 5 | Spirit Box  | Freezing Temperature";
+                            break;
+                        case ValueTypePublicSealedObLi1InObBoStInBoInUnique.EnumNPublicSealedvaSpWrPhPoBaJiMaReShUnique.Raiju:
+                            Main.evidence = "EMF 5 | Ghost Orb | DOTS Projector";
+                            break;
+                        case ValueTypePublicSealedObLi1InObBoStInBoInUnique.EnumNPublicSealedvaSpWrPhPoBaJiMaReShUnique.Obake:
+                            Main.evidence = "EMF 5 | Fingerprints | Ghost Orb";
                             break;
                         default:
                             break;
@@ -144,26 +156,11 @@ namespace C4PhasMod
                         case GhostAI.EnumNPublicSealedvaidwahufalidothfuapUnique.GhostAbility:
                             Main.ghostState = "Ghost Ability";
                             break;
-                        case GhostAI.EnumNPublicSealedvaidwahufalidothfuapUnique.killPlayer:
-                            Main.ghostState = "Kill Player";
-                            break;
-                        case GhostAI.EnumNPublicSealedvaidwahufalidothfuapUnique.sink:
-                            Main.ghostState = "Sink";
-                            break;
-                        case GhostAI.EnumNPublicSealedvaidwahufalidothfuapUnique.sound:
-                            Main.ghostState = "Sound";
-                            break;
-                        case GhostAI.EnumNPublicSealedvaidwahufalidothfuapUnique.painting:
-                            Main.ghostState = "Painting";
-                            break;
                         case GhostAI.EnumNPublicSealedvaidwahufalidothfuapUnique.mannequin:
                             Main.ghostState = "Mennequin";
                             break;
                         case GhostAI.EnumNPublicSealedvaidwahufalidothfuapUnique.teleportObject:
                             Main.ghostState = "Teleport Object";
-                            break;
-                        case GhostAI.EnumNPublicSealedvaidwahufalidothfuapUnique.animationObject:
-                            Main.ghostState = "Animate Object";
                             break;
                         default:
                             Main.ghostState = "Idle";

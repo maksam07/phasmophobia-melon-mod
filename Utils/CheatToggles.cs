@@ -11,7 +11,9 @@
         public static bool enableEspGhost = false;
         public static bool enableEspGhostVisible = false;
         public static bool enableEspGhostBone = false;
+        public static bool enableEspGhostFinger = false;
         public static bool enableEspPlayer = false;
+        public static bool enableEspPlayerBone = false;
         public static bool enableEspBone = false;
         public static bool enableEspOuija = false;
         public static bool enableEspEmf = false;

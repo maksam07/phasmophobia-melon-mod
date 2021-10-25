@@ -273,30 +273,41 @@ namespace C4PhasMod
                             CheatToggles.enableEspGhostBone = !CheatToggles.enableEspGhostBone;
                             Debug.Msg("Ghost Bone ESP: Toggled " + (CheatToggles.enableEspGhostBone ? "On" : "Off"), 1);
                         }
-                        if (GUI.Toggle(new Rect(650f, 62f, 150f, 20f), CheatToggles.enableEspPlayer, "Player ESP") != CheatToggles.enableEspPlayer)
+                        if (GUI.Toggle(new Rect(650f, 62f, 150f, 20f), CheatToggles.enableEspGhostFinger, "Ghost Bone Finger ESP") != CheatToggles.enableEspGhostFinger)
+                        {
+                            CheatToggles.enableEspGhostFinger = !CheatToggles.enableEspGhostFinger;
+                            Debug.Msg("Ghost Bone Finger ESP: Toggled " + (CheatToggles.enableEspGhostFinger ? "On" : "Off"), 1);
+                        }
+                        if (GUI.Toggle(new Rect(650f, 82f, 150f, 20f), CheatToggles.enableEspPlayer, "Player ESP") != CheatToggles.enableEspPlayer)
                         {
                             CheatToggles.enableEspPlayer = !CheatToggles.enableEspPlayer;
                             Debug.Msg("Player ESP: Toggled " + (CheatToggles.enableEspPlayer ? "On" : "Off"), 1);
 
                         }
-                        if (GUI.Toggle(new Rect(650f, 82f, 150f, 20f), CheatToggles.enableEspBone, "Bone ESP") != CheatToggles.enableEspBone)
+                        if (GUI.Toggle(new Rect(650f, 102f, 150f, 20f), CheatToggles.enableEspPlayerBone, "Player Bone ESP") != CheatToggles.enableEspPlayerBone)
+                        {
+                            CheatToggles.enableEspPlayerBone = !CheatToggles.enableEspPlayerBone;
+                            Debug.Msg("Player Bone ESP: Toggled " + (CheatToggles.enableEspPlayerBone ? "On" : "Off"), 1);
+
+                        }
+                        if (GUI.Toggle(new Rect(650f, 122f, 150f, 20f), CheatToggles.enableEspBone, "Bone ESP") != CheatToggles.enableEspBone)
                         {
                             CheatToggles.enableEspBone = !CheatToggles.enableEspBone;
                             Debug.Msg("Bone ESP: Toggled " + (CheatToggles.enableEspBone ? "On" : "Off"), 1);
 
                         }
-                        if (GUI.Toggle(new Rect(650f, 102f, 150f, 20f), CheatToggles.enableEspOuija, "Ouija ESP") != CheatToggles.enableEspOuija)
+                        if (GUI.Toggle(new Rect(650f, 142f, 150f, 20f), CheatToggles.enableEspOuija, "Ouija ESP") != CheatToggles.enableEspOuija)
                         {
                             CheatToggles.enableEspOuija = !CheatToggles.enableEspOuija;
                             Debug.Msg("Ouija ESP: Toggled " + (CheatToggles.enableEspOuija ? "On" : "Off"), 1);
 
                         }
-                        if (GUI.Toggle(new Rect(650f, 122f, 150f, 20f), CheatToggles.enableEspFuseBox, "FuseBox ESP") != CheatToggles.enableEspFuseBox)
+                        if (GUI.Toggle(new Rect(650f, 162f, 150f, 20f), CheatToggles.enableEspFuseBox, "FuseBox ESP") != CheatToggles.enableEspFuseBox)
                         {
                             CheatToggles.enableEspFuseBox = !CheatToggles.enableEspFuseBox;
                             Debug.Msg("FuseBox ESP: Toggled " + (CheatToggles.enableEspFuseBox ? "On" : "Off"), 1);
                         }
-                        if (GUI.Toggle(new Rect(650f, 142f, 150f, 20f), CheatToggles.enableEspEmf, "Emf ESP") != CheatToggles.enableEspEmf)
+                        if (GUI.Toggle(new Rect(650f, 182f, 150f, 20f), CheatToggles.enableEspEmf, "Emf ESP") != CheatToggles.enableEspEmf)
                         {
                             CheatToggles.enableEspEmf = !CheatToggles.enableEspEmf;
                             Debug.Msg("Emf ESP: Toggled " + (CheatToggles.enableEspEmf ? "On" : "Off"), 1);
@@ -460,7 +471,7 @@ namespace C4PhasMod
                             LightSwitch lightSwitchr = lightSwitches[new System.Random().Next(0, lightSwitches.Count)];
                             if (lightSwitchr != null)
                             {
-                                lightSwitchr.UseLight();
+                                lightSwitchr.UseLightSwitch();
                             }
                             Debug.Msg("Random Light Use", 1);
                         }
@@ -543,7 +554,7 @@ namespace C4PhasMod
                             LightSwitch lightSwitchr = lightSwitches[new System.Random().Next(0, lightSwitches.Count)];
                             if (lightSwitchr != null)
                             {
-                                lightSwitchr.UseLight();
+                                lightSwitchr.UseLightSwitch();
                             }
                             Debug.Msg("Random Light Use", 1);
                         }
@@ -713,8 +724,10 @@ namespace C4PhasMod
             CheatToggles.enableEsp = false;
             CheatToggles.enableEspGhost = false;
             CheatToggles.enableEspGhostBone = false;
+            CheatToggles.enableEspGhostFinger = false;
             CheatToggles.enableEspGhostVisible = false;
             CheatToggles.enableEspPlayer = false;
+            CheatToggles.enableEspPlayerBone = false;
             CheatToggles.enableEspBone = false;
             CheatToggles.enableEspOuija = false;
             CheatToggles.enableEspEmf = false;
@@ -727,7 +740,7 @@ namespace C4PhasMod
             BasicInformations.DisableGhost();
         }
 
-        private Player GetLocalPlayer()
+        public static Player GetLocalPlayer()
         {
             Debug.Msg("GetLocalPlayer", 3);
             if (players == null)
@@ -797,6 +810,7 @@ namespace C4PhasMod
             {
                 Debug.Msg("isRunningTrue", 3);
                 isRunning = true;
+
                 Debug.Msg("cameraMain", 3);
                 cameraMain = Camera.main ?? null;
                 yield return new WaitForSeconds(0.15f);
@@ -1013,7 +1027,7 @@ namespace C4PhasMod
         public static String ghostState = null;
         public static String ghostIsShy = null;
         public static String myPlayerSanity = null;
-        public static String[] mapNames = { "Opening Scene", "Lobby", "Tanglewood Street", "Ridgeview Road House", "Edgefield Street House", "Asylum", "Brownstone High School", "Bleasdale Farmhouse", "Grafton Farmhouse", "Prison", "Willow Street House" };
+        public static String[] mapNames = { "Opening Scene", "Lobby", "Tanglewood Street", "Ridgeview Road House", "Edgefield Street House", "Asylum", "Brownstone High School", "Bleasdale Farmhouse", "Grafton Farmhouse", "Prison", "Willow Street House", "Maple Lodge Campsite" };
         public static String inSight = "";
         public static bool settingsExist = false;
         public static int initializedScene;
