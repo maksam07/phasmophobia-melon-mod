@@ -39,35 +39,37 @@ namespace C4PhasMod
 
                 if (CheatToggles.enableEspGhostBone && Main.gameController != null && Main.ghostAI != null)
                 {
-                    GUIStyle guiStyle = new GUIStyle();
-                    GUI.color = Color.cyan;
-                    guiStyle.fontSize = 15; guiStyle.normal.textColor = Color.cyan;
-                    Transform[] bones = new Transform[55];
-                    Vector3[] bonesPos = new Vector3[55];
-                    int i = 0; int x = 0;
-                    foreach (HumanBodyBones bone in System.Enum.GetValues(typeof(HumanBodyBones)))
-                    {
-                        if (i < 55)
-                        {
-                            try
-                            {
-                                bones[i] = Main.ghostAI.field_Public_Animator_0.GetBoneTransform(bone) ?? null;
-                                if (bones[i] != null)
-                                {
-                                    bonesPos[x] = Main.cameraMain.WorldToScreenPoint(bones[i].position);
-                                    if (bonesPos[x].z < 0)
-                                        break;
-                                    GUI.DrawTexture(new Rect(bonesPos[x].x, (float)Screen.height - bonesPos[x].y, 5, 5), Texture2D.whiteTexture, ScaleMode.StretchToFill);
-                                    x++;
-                                }
-                            }
-                            catch (System.Exception e)
-                            {
-                                Debug.Msg("Exception: " + e, 3);
-                            }
-                        }
-                        i++;
-                    }
+                    ESP.ProcessBones();
+
+                    /* DEBUGGING CODE */
+                    //GUIStyle guiStyle = new GUIStyle();
+                    //GUI.color = Color.cyan;
+                    //guiStyle.fontSize = 15; guiStyle.normal.textColor = Color.cyan;
+                    //Transform bonesTrans;
+                    //Vector3 bonesPos;
+                    //int i = 0;
+                    //foreach (HumanBodyBones bone in System.Enum.GetValues(typeof(HumanBodyBones)))
+                    //{
+                    //    if (i < 55)
+                    //    {
+                    //        try
+                    //        {
+                    //            bonesTrans = Main.ghostAI.field_Public_Animator_0.GetBoneTransform(bone) ?? null;
+                    //            if (bonesTrans != null)
+                    //            {
+                    //                bonesPos = Main.cameraMain.WorldToScreenPoint(bonesTrans.position);
+                    //                if (bonesPos.z < 0)
+                    //                    break;
+                    //                GUI.DrawTexture(new Rect(bonesPos.x, (float)Screen.height - bonesPos.y, 5, 5), Texture2D.whiteTexture, ScaleMode.StretchToFill);
+                    //            }
+                    //        }
+                    //        catch (System.Exception e)
+                    //        {
+                    //            Debug.Msg("Exception: " + e, 3);
+                    //        }
+                    //    }
+                    //    i++;
+                    //}
                 }
 
                 if (CheatToggles.enableEspPlayer == true && Main.gameController != null && Main.players != null && Main.players.Count > 1)
@@ -158,6 +160,85 @@ namespace C4PhasMod
                     }
                 }
             }
+        }
+
+        private static void ProcessBones()
+        {
+            GUIStyle guiStyle = new GUIStyle();
+            GUI.color = Color.cyan;
+            guiStyle.fontSize = 15; guiStyle.normal.textColor = Color.cyan;
+
+            HumanBodyBones[] bonesToDraw =
+            {
+                HumanBodyBones.Head,
+                HumanBodyBones.Neck,
+                HumanBodyBones.RightShoulder,
+                HumanBodyBones.RightUpperArm,
+                HumanBodyBones.RightLowerArm,
+                HumanBodyBones.RightHand,
+                HumanBodyBones.LastBone,
+                HumanBodyBones.Neck,
+                HumanBodyBones.LeftShoulder,
+                HumanBodyBones.LeftUpperArm,
+                HumanBodyBones.LeftLowerArm,
+                HumanBodyBones.LeftHand,
+                HumanBodyBones.LastBone,
+                HumanBodyBones.Neck,
+                HumanBodyBones.Chest,
+                HumanBodyBones.Spine,
+                HumanBodyBones.RightUpperLeg,
+                HumanBodyBones.RightLowerLeg,
+                HumanBodyBones.RightFoot,
+                HumanBodyBones.RightToes,
+                HumanBodyBones.LastBone,
+                HumanBodyBones.Spine,
+                HumanBodyBones.LeftUpperLeg,
+                HumanBodyBones.LeftLowerLeg,
+                HumanBodyBones.LeftFoot,
+                HumanBodyBones.LeftToes,
+                HumanBodyBones.LastBone
+            };
+
+            int i = 0;
+            foreach (HumanBodyBones boneToDraw in bonesToDraw)
+            {
+                if (boneToDraw == HumanBodyBones.LastBone)
+                {
+                    i++;
+                    continue;
+                }
+                Vector3 bonePos = ESP.getBonePos(boneToDraw);
+                if (bonePos.z < 0)
+                    break;
+
+                if (boneToDraw == HumanBodyBones.Head)
+                    GUI.DrawTexture(new Rect(bonePos.x-8f, (float)Screen.height - bonePos.y-15f, 16, 30), Texture2D.whiteTexture, ScaleMode.StretchToFill);
+                else
+                    GUI.DrawTexture(new Rect(bonePos.x-2.5f, (float)Screen.height - bonePos.y - 2.5f, 5, 5), Texture2D.whiteTexture, ScaleMode.StretchToFill);
+
+                if (i + 1 <= 25 && bonesToDraw[i + 1] != HumanBodyBones.LastBone)
+                {
+                    Vector3 nextBone = ESP.getBonePos(bonesToDraw[i + 1]);
+
+                    if (bonePos.x != 0 && nextBone.x != 0)
+                        Drawing.DrawLine(new Vector2(bonePos.x, (float)Screen.height - bonePos.y), new Vector2(nextBone.x, (float)Screen.height - nextBone.y), Color.cyan, 2);
+                }
+                i++;
+            }
+        }
+
+        private static Vector3 getBonePos(HumanBodyBones bone)
+        {
+            Transform boneTransf = null;
+            try
+            {
+                boneTransf = Main.ghostAI.field_Public_Animator_0.GetBoneTransform(bone);
+            }
+            catch (System.Exception e)
+            {
+                Debug.Msg("Exception: " + e, 3);
+            }
+            return (boneTransf != null) ? Main.cameraMain.WorldToScreenPoint(boneTransf.position) : new Vector3(0, 0, 0);
         }
     }
 }
