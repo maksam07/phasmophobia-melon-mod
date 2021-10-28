@@ -1,8 +1,15 @@
-﻿# Phasmophobia MelonLoader Mod (Discontinued/Only crucial updates)  
+﻿# Phasmophobia MelonLoader Mod (Only crucial updates)   
 Only works with a [bypass](https://github.com/Cr4nkSt4r/PhasBypass)  
-This mod is discontinued and only receives crucial updates.  
+This mod is **discontinued** and only receives crucial updates.  
 Useful pull requests will be accepted.
 
+# Issues are disabled again
+Most of the leechers aren't even able to fill proper issue templates nor are they able to read the instructions at the end.  
+I get so many useless Issues, I can't spent my time on that anymore.  
+As a result, I lost the fun on this project again and keep it in the discontinued state.
+
+
+# Informations
 Just a private project to learn some basic programming of Unity Engine Mods with the help of MelonLoader.  
 Place the generated DLL into the MelonLoader Mods folder.   
   
