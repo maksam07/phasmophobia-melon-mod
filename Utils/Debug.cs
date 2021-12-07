@@ -14,11 +14,14 @@ namespace C4PhasMod
                     MelonLogger.Msg($"[#] {text}");
                 if (debugMode3 && mode == 3)
                     MelonLogger.Msg($"[D] {text}");
+                if (debugMode4 && mode == 4)
+                    MelonLogger.Msg($"[E] {text}");
             }
         }
 
         public static bool debugMode1 = false;
         public static bool debugMode2 = false;
         public static bool debugMode3 = false;
+        public static bool debugMode4 = false;
     }
 }
