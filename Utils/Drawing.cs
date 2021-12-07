@@ -43,16 +43,12 @@ namespace C4PhasMod
             GUI.DrawTexture(new Rect(position, size), Texture2D.whiteTexture, ScaleMode.StretchToFill);
         }
 
-        public static void DrawBoxOutline(Vector2 center, float width, float height, Color color)
+        public static void DrawBoxOutline(Vector2 Point, float width, float height, Color color)
         {
-            Vector2 upperLeft = center - new Vector2(width / 2, height / 2);
-            Vector2 lowerLeft = center + new Vector2(-(width / 2), height / 2);
-            Vector2 upperRight = center + new Vector2(width / 2, -(height / 2));
-            Vector2 lowerRight = center + new Vector2(width / 2, height / 2);
-            DrawLine(upperLeft, lowerLeft, color, 2);
-            DrawLine(lowerLeft, lowerRight, color, 2);
-            DrawLine(lowerRight, upperRight, color, 2);
-            DrawLine(upperRight, upperLeft, color, 2);
+            DrawLine(Point, new Vector2(Point.x + width, Point.y), color, 2);
+            DrawLine(Point, new Vector2(Point.x, Point.y + height), color, 2);
+            DrawLine(new Vector2(Point.x + width, Point.y + height), new Vector2(Point.x + width, Point.y), color, 2);
+            DrawLine(new Vector2(Point.x + width, Point.y + height), new Vector2(Point.x, Point.y + height), color, 2);
         }
     }
 }

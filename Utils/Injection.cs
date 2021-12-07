@@ -41,9 +41,6 @@ namespace C4PhasMod
 
         public static int Main()
         {
-#if _DEBUG
-            MelonLogger.Msg("!!! THIS IS A DEBUG VERSION !!!");
-#endif
             Process targetProcess = Process.GetProcessesByName("Phasmophobia")[0];
             IntPtr procHandle = OpenProcess(PROCESS_CREATE_THREAD | PROCESS_QUERY_INFORMATION | PROCESS_VM_OPERATION | PROCESS_VM_WRITE | PROCESS_VM_READ, false, targetProcess.Id);
             IntPtr loadLibraryAddr = GetProcAddress(GetModuleHandle("kernel32.dll"), "LoadLibraryA");

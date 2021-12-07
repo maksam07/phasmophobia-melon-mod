@@ -21,9 +21,6 @@
 
         public static bool enableFullbright = false;
         public static bool enableInfStamina = false;
-        public static bool openXPMoneyItems = false;
-
-        public static bool enableTesting = false;
 
         public static bool enableDebug = false;
         public static bool enableHotkeys = true;
