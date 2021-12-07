@@ -8,7 +8,7 @@ namespace C4PhasMod
         {
             if (Main.initializedScene > 1)
             {
-                if (CheatToggles.enableEspGhost == true && Main.gameController != null && Main.ghostAI != null && Main.ghostAIs.Count > 0)
+                if (CheatToggles.enableEspGhost == true && Main.gameController != null && Main.ghostAI != null)
                 {
                     Vector3 w2s = Main.cameraMain.WorldToScreenPoint(Main.ghostAI.transform.position);
                     Vector3 ghostPosition = Main.cameraMain.WorldToScreenPoint(Main.ghostAI.field_Public_Transform_0.transform.position);
@@ -115,28 +115,24 @@ namespace C4PhasMod
                     }
                 }
 
-                if (CheatToggles.enableEspBone == true && Main.gameController != null && Main.dnaEvidences != null && Main.dnaEvidences.Count > 0)
+                if (CheatToggles.enableEspBone == true && Main.gameController != null && Main.dnaEvidence != null)
                 {
-                    foreach (DNAEvidence dnaEvidence in Main.dnaEvidences)
+                    Vector3 vector3 = Main.cameraMain.WorldToScreenPoint(Main.dnaEvidence.transform.position);
+                    if (vector3.z > 0f)
                     {
-                        Vector3 vector3 = Main.cameraMain.WorldToScreenPoint(dnaEvidence.transform.position);
-                        if (vector3.z > 0f)
-                        {
-                            GUI.Label(new Rect(new Vector2(vector3.x, Screen.height - (vector3.y + 1f)), new Vector2(100f, 100f)), "<color=#FFFFFF><b>Bone</b></color>");
-                        }
+                        GUI.Label(new Rect(new Vector2(vector3.x, Screen.height - (vector3.y + 1f)), new Vector2(100f, 100f)), "<color=#FFFFFF><b>Bone</b></color>");
                     }
                 }
 
-                if (CheatToggles.enableEspOuija == true && Main.gameController != null && Main.ouijaBoards != null && Main.ouijaBoards.Count > 0)
+                if (CheatToggles.enableEspOuija == true && Main.gameController != null && Main.ouijaBoard != null)
                 {
-                    foreach (OuijaBoard ouijaBoard in Main.ouijaBoards)
+
+                    Vector3 vector2 = Main.cameraMain.WorldToScreenPoint(Main.ouijaBoard.transform.position);
+                    if (vector2.z > 0f)
                     {
-                        Vector3 vector2 = Main.cameraMain.WorldToScreenPoint(ouijaBoard.transform.position);
-                        if (vector2.z > 0f)
-                        {
-                            GUI.Label(new Rect(new Vector2(vector2.x, Screen.height - (vector2.y + 1f)), new Vector2(100f, 100f)), "<color=#D11500><b>Ouija Board</b></color>");
-                        }
+                        GUI.Label(new Rect(new Vector2(vector2.x, Screen.height - (vector2.y + 1f)), new Vector2(100f, 100f)), "<color=#D11500><b>Ouija Board</b></color>");
                     }
+
                 }
 
                 if (CheatToggles.enableEspEmf == true && Main.gameController != null && Main.emf != null && Main.emf.Count > 0)

@@ -55,7 +55,6 @@
     <Compile Include="Common\ESP.cs" />
     <Compile Include="Common\Fullbright.cs" />
     <Compile Include="Common\Main.cs" />
-    <Compile Include="Common\Trolling.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\BuildInfo.cs" />
     <Compile Include="Utils\CheatToggles.cs" />

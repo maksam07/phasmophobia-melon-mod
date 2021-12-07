@@ -1,5 +1,4 @@
-﻿using ExitGames.Client.Photon;
-using MelonLoader;
+﻿using MelonLoader;
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
@@ -166,33 +165,6 @@ namespace C4PhasMod
                         myPlayer.field_Public_FirstPersonController_0.enabled = true;
                 }
             }
-            if (keyboard.hKey.wasPressedThisFrame && !CheatToggles.guiEnabled && CheatToggles.enableHotkeys)
-            {
-                Trolling.Hunt();
-            }
-
-            if (keyboard.iKey.wasPressedThisFrame && !CheatToggles.guiEnabled && CheatToggles.enableHotkeys)
-            {
-                Trolling.Interact();
-            }
-
-            if (keyboard.oKey.wasPressedThisFrame && !CheatToggles.guiEnabled && CheatToggles.enableHotkeys)
-            {
-                Trolling.Appear();
-            }
-
-            if (keyboard.pKey.wasPressedThisFrame && !CheatToggles.guiEnabled && CheatToggles.enableHotkeys)
-            {
-                Trolling.Idle();
-            }
-            if (keyboard.uKey.wasPressedThisFrame && !CheatToggles.guiEnabled && CheatToggles.enableHotkeys)
-            {
-                Trolling.LockDoors(3);
-            }
-            if (keyboard.lKey.wasPressedThisFrame && !CheatToggles.guiEnabled && CheatToggles.enableHotkeys)
-            {
-                Trolling.LockDoors(1);
-            }
         }
         public override void OnGUI()
         {
@@ -219,29 +191,6 @@ namespace C4PhasMod
                             CheatToggles.enableEspGhost = !CheatToggles.enableEspGhost;
                             Debug.Msg("ESP: Toggled " + (CheatToggles.enableEspGhost ? "On" : "Off"), 1);
 
-                        }
-                        if (GUI.Toggle(new Rect(650f, 22f, 150f, 20f), CheatToggles.guiGhostTroll, "Troll Options") != CheatToggles.guiGhostTroll)
-                        {
-                            CheatToggles.guiGhostTroll = !CheatToggles.guiGhostTroll;
-                        }
-                        if (CheatToggles.guiGhostTroll == true)
-                        {
-                            if (GUI.Button(new Rect(800f, 2f, 150f, 20f), "Hunt") && levelController != null)
-                            {
-                                Trolling.Hunt();
-                            }
-                            if (GUI.Button(new Rect(800f, 22f, 150f, 20f), "Idle") && levelController != null)
-                            {
-                                Trolling.Idle();
-                            }
-                            if (GUI.Button(new Rect(800f, 42f, 150f, 20f), "Appear") && levelController != null)
-                            {
-                                Trolling.Appear();
-                            }
-                            if (GUI.Button(new Rect(800f, 62f, 150f, 20f), "Unappear") && levelController != null)
-                            {
-                                Trolling.UnAppear();
-                            }
                         }
                     }
                     if (GUI.Toggle(new Rect(500f, 22f, 150f, 20f), CheatToggles.guiESP, "ESP GUI") != CheatToggles.guiESP)
@@ -362,12 +311,6 @@ namespace C4PhasMod
                                 Fullbright.Disable();
                             }
                         }
-                        if (GUI.Toggle(new Rect(650f, 42f, 150f, 20f), CheatToggles.enableHotkeys, "Enable Troll Hotkeys") != CheatToggles.enableHotkeys)
-                        {
-                            CheatToggles.enableHotkeys = !CheatToggles.enableHotkeys;
-                            Debug.Msg("Troll Hotkeys: Toggled " + (CheatToggles.enableHotkeys ? "On" : "Off"), 1);
-                            MelonPreferences.SetEntryValue("Settings", "HotkeysEnabled", CheatToggles.enableHotkeys);
-                        }
                         if (GUI.Toggle(new Rect(650f, 62f, 150f, 20f), CheatToggles.enableInfStamina, "Infinite Stamina") != CheatToggles.enableInfStamina)
                         {
                             CheatToggles.enableInfStamina = !CheatToggles.enableInfStamina;
@@ -385,33 +328,6 @@ namespace C4PhasMod
                         CheatToggles.guiDebug = false;
                         CheatToggles.guiTest = false;
                         CheatToggles.guiFeatureCollection = false;
-                    }
-                    if (CheatToggles.guiTroll == true)
-                    {
-                        if (GUI.Button(new Rect(650f, 2f, 150f, 20f), "Lock Exit Doors") && levelController != null)
-                        {
-                            Trolling.LockDoors(1);
-                        }
-                        if (GUI.Button(new Rect(650f, 22f, 150f, 20f), "Lock All Doors") && levelController != null)
-                        {
-                            Trolling.LockDoors(2);
-                        }
-                        if (GUI.Button(new Rect(650f, 42f, 150f, 20f), "Unlock Exit Doors") && levelController != null)
-                        {
-                            Trolling.LockDoors(3);
-                        }
-                        if (GUI.Button(new Rect(650f, 62f, 150f, 20f), "Unlock All Doors") && levelController != null)
-                        {
-                            Trolling.LockDoors(4);
-                        }
-                        if (GUI.Button(new Rect(650f, 82f, 150f, 20f), "Door knock") && levelController != null)
-                        {
-                            Trolling.EventDoorKnock();
-                        }
-                        if (GUI.Button(new Rect(650f, 102f, 150f, 20f), "Random Event") && levelController != null)
-                        {
-                            Trolling.Interact();
-                        }
                     }
                     if (GUI.Toggle(new Rect(500f, 82f, 150f, 20f), CheatToggles.guiDebug, "Debug GUI") != CheatToggles.guiDebug)
                     {
@@ -466,29 +382,6 @@ namespace C4PhasMod
                     }
                     if (CheatToggles.guiTest == true)
                     {
-                        if (GUI.Button(new Rect(650f, 2f, 150f, 20f), "Random Light Use") && levelController != null)
-                        {
-                            LightSwitch lightSwitchr = lightSwitches[new System.Random().Next(0, lightSwitches.Count)];
-                            if (lightSwitchr != null)
-                            {
-                                lightSwitchr.UseLightSwitch();
-                            }
-                            Debug.Msg("Random Light Use", 1);
-                        }
-                        if (GUI.Button(new Rect(650f, 42f, 150f, 20f), "All Lights Off") && levelController != null)
-                        {
-                            foreach (LightSwitch lightSwitchaoff in lightSwitches)
-                            {
-                                lightSwitchaoff.TurnOff();
-                                lightSwitchaoff.TurnOffNetworked(true);
-                            }
-                            Debug.Msg("All Lights Off", 1);
-                        }
-                        if (GUI.Button(new Rect(650f, 62f, 150f, 20f), "Blinking Lights") && levelController != null)
-                        {
-                            lightSwitchToggle = !lightSwitchToggle;
-                            Debug.Msg("Blinking Lights", 1);
-                        }
                         if (GUI.Button(new Rect(650f, 82f, 150f, 20f), "Disable All Features") && levelController != null)
                         {
                             DisableAll();
@@ -506,72 +399,6 @@ namespace C4PhasMod
                         CheatToggles.guiTroll = false;
                         CheatToggles.guiDebug = false;
                         CheatToggles.guiTest = false;
-                    }
-                    if (CheatToggles.guiFeatureCollection == true)
-                    {
-                        if (GUI.Button(new Rect(650f, 2f, 150f, 20f), "Hunt") && levelController != null)
-                        {
-                            Trolling.Hunt();
-                        }
-                        if (GUI.Button(new Rect(650f, 22f, 150f, 20f), "Idle") && levelController != null)
-                        {
-                            Trolling.Idle();
-                        }
-                        if (GUI.Button(new Rect(650f, 42f, 150f, 20f), "Appear") && levelController != null)
-                        {
-                            Trolling.Appear();
-                        }
-                        if (GUI.Button(new Rect(650f, 62f, 150f, 20f), "Unappear") && levelController != null)
-                        {
-                            Trolling.UnAppear();
-                        }
-                        if (GUI.Button(new Rect(800f, 2f, 150f, 20f), "Lock Exit Doors") && levelController != null)
-                        {
-                            Trolling.LockDoors(1);
-                        }
-                        if (GUI.Button(new Rect(800f, 22f, 150f, 20f), "Lock All Doors") && levelController != null)
-                        {
-                            Trolling.LockDoors(2);
-                        }
-                        if (GUI.Button(new Rect(800f, 42f, 150f, 20f), "Unlock Exit Doors") && levelController != null)
-                        {
-                            Trolling.LockDoors(3);
-                        }
-                        if (GUI.Button(new Rect(800f, 62f, 150f, 20f), "Unlock All Doors") && levelController != null)
-                        {
-                            Trolling.LockDoors(4);
-                        }
-                        if (GUI.Button(new Rect(800f, 82f, 150f, 20f), "Door knock") && levelController != null)
-                        {
-                            Trolling.EventDoorKnock();
-                        }
-                        if (GUI.Button(new Rect(800f, 102f, 150f, 20f), "Random Event") && levelController != null)
-                        {
-                            Trolling.Interact();
-                        }
-                        if (GUI.Button(new Rect(950f, 2f, 150f, 20f), "Random Light Use") && levelController != null)
-                        {
-                            LightSwitch lightSwitchr = lightSwitches[new System.Random().Next(0, lightSwitches.Count)];
-                            if (lightSwitchr != null)
-                            {
-                                lightSwitchr.UseLightSwitch();
-                            }
-                            Debug.Msg("Random Light Use", 1);
-                        }
-                        if (GUI.Button(new Rect(950f, 42f, 150f, 20f), "All Lights Off") && levelController != null)
-                        {
-                            foreach (LightSwitch lightSwitchaoff in lightSwitches)
-                            {
-                                lightSwitchaoff.TurnOff();
-                                lightSwitchaoff.TurnOffNetworked(true);
-                            }
-                            Debug.Msg("All Lights Off", 1);
-                        }
-                        if (GUI.Button(new Rect(950f, 62f, 150f, 20f), "Blinking Lights") && levelController != null)
-                        {
-                            lightSwitchToggle = !lightSwitchToggle;
-                            Debug.Msg("Blinking Lights", 1);
-                        }
                     }
                 }
                 else
@@ -663,36 +490,11 @@ namespace C4PhasMod
                 BasicInformations.EnablePlayer();
                 GUI.Label(new Rect(10f, 77f, 300f, 50f), "<color=#00FF00><b>My Sanity:</b> " + (myPlayerSanity ?? "N/A") + "</color>");
             }
-            if (lightSwitchToggle && !lightSwitchRunning)
-            {
-                Debug.Msg("lightSwitchRunningTrue", 3);
-                lightSwitchRunning = true;
-                blinkingLightsRoutine = MelonCoroutines.Start(BlinkingLights());
-            }
             if (CheatToggles.enableInfStamina)
             {
                 myPlayer.field_Public_PlayerStamina_0.field_Protected_Boolean_1 = false;
                 myPlayer.field_Public_PlayerStamina_0.field_Protected_Single_1 = 3;
             }
-        }
-
-        IEnumerator BlinkingLights()
-        {
-            if (lightSwitchRunning)
-            {
-                foreach (LightSwitch lightSwitchsrlb in lightSwitches)
-                {
-                    Debug.Msg("FlickerNetworked", 3);
-                    lightSwitchsrlb.field_Public_PhotonView_0.RPC("FlickerNetworked", 0, Trolling.getRPCObject(0, false));
-                    yield return new WaitForSeconds(0.25f);
-
-                }
-                Debug.Msg("FlickerNetworked end", 3);
-                yield return new WaitForSeconds(0.15f);
-                yield return new WaitForSeconds(0.10f);
-                lightSwitchRunning = false;
-            }
-            yield return null;
         }
 
         private void ChangeNickname(String playerName)
@@ -776,7 +578,7 @@ namespace C4PhasMod
             MelonPreferences.CreateCategory("Settings", "Settings");
             Debug.Msg("Create Category: Settings", 3);
 
-            MelonPreferences.CreateEntry("Settings", "HotkeysEnabled", true, "Hotkeys Enabled");
+            MelonPreferences.CreateEntry("Settings", "HotkeysEnabled", false, "Hotkeys Enabled");
             Debug.Msg("Create Entry: HotkeysEnabled", 3);
 
             MelonPreferences.CreateEntry("Settings", "DebugEnabled", true, "Debug Enabled");
@@ -785,7 +587,7 @@ namespace C4PhasMod
             MelonPreferences.CreateEntry("Settings", "DebugM1Enabled", true, "Debug M1 Enabled");
             Debug.Msg("Create Entry: Debug1Enabled", 3);
 
-            MelonPreferences.CreateEntry("Settings", "DebugM2Enabled", true, "Debug M2 Enabled");
+            MelonPreferences.CreateEntry("Settings", "DebugM2Enabled", false, "Debug M2 Enabled");
             Debug.Msg("Create Entry: Debug2Enabled", 3);
 
             MelonPreferences.CreateEntry("Settings", "DebugM3Enabled", false, "Debug M3 Enabled");
@@ -815,12 +617,12 @@ namespace C4PhasMod
                 cameraMain = Camera.main ?? null;
                 yield return new WaitForSeconds(0.15f);
 
-                Debug.Msg("dnaEvidences", 3);
-                dnaEvidences = Object.FindObjectsOfType<DNAEvidence>().ToList<DNAEvidence>() ?? null;
+                Debug.Msg("dnaEvidence", 3);
+                dnaEvidence = Object.FindObjectOfType<DNAEvidence>() ?? null;
                 yield return new WaitForSeconds(0.15f);
 
-                Debug.Msg("doors", 3);
-                doors = Object.FindObjectsOfType<Door>().ToList<Door>() ?? null;
+                Debug.Msg("ouijaBoard", 3);
+                ouijaBoard = Object.FindObjectOfType<OuijaBoard>() ?? null;
                 yield return new WaitForSeconds(0.15f);
 
                 Debug.Msg("fuseBox", 3);
@@ -835,10 +637,6 @@ namespace C4PhasMod
                 ghostAI = Object.FindObjectOfType<GhostAI>() ?? null;
                 yield return new WaitForSeconds(0.15f);
 
-                Debug.Msg("ghostAIs", 3);
-                ghostAIs = Object.FindObjectsOfType<GhostAI>().ToList<GhostAI>() ?? null;
-                yield return new WaitForSeconds(0.15f);
-
                 Debug.Msg("ghostActivity", 3);
                 ghostActivity = Object.FindObjectOfType<GhostActivity>() ?? null;
                 yield return new WaitForSeconds(0.15f);
@@ -851,26 +649,6 @@ namespace C4PhasMod
                 levelController = Object.FindObjectOfType<LevelController>() ?? null;
                 yield return new WaitForSeconds(0.15f);
 
-                Debug.Msg("lightSwitch", 3);
-                lightSwitch = Object.FindObjectOfType<LightSwitch>() ?? null;
-                yield return new WaitForSeconds(0.15f);
-
-                Debug.Msg("lightSwitches", 3);
-                lightSwitches = Object.FindObjectsOfType<LightSwitch>().ToList<LightSwitch>() ?? null;
-                yield return new WaitForSeconds(0.15f);
-
-                Debug.Msg("soundController", 3);
-                soundController = Object.FindObjectOfType<SoundController>() ?? null;
-                yield return new WaitForSeconds(0.15f);
-
-                Debug.Msg("ouijaBoards", 3);
-                ouijaBoards = Object.FindObjectsOfType<OuijaBoard>().ToList<OuijaBoard>() ?? null;
-                yield return new WaitForSeconds(0.15f);
-
-                Debug.Msg("ouijaBoards", 3);
-                windows = Object.FindObjectsOfType<Window>().ToList<Window>() ?? null;
-                yield return new WaitForSeconds(0.15f);
-
                 if (Object.FindObjectOfType<Player>() != null)
                 {
                     Debug.Msg("player", 3);
@@ -879,10 +657,6 @@ namespace C4PhasMod
 
                     Debug.Msg("players", 3);
                     players = Object.FindObjectsOfType<Player>().ToList<Player>() ?? null;
-                    yield return new WaitForSeconds(0.15f);
-
-                    Debug.Msg("playerStatsManager", 3);
-                    playerStatsManager = Object.FindObjectOfType<PlayerStatsManager>() ?? null;
                     yield return new WaitForSeconds(0.15f);
 
                     Debug.Msg("myPlayer", 3);
@@ -948,10 +722,6 @@ namespace C4PhasMod
                     players = Object.FindObjectsOfType<Player>().ToList<Player>() ?? null;
                     yield return new WaitForSeconds(0.15f);
 
-                    Debug.Msg("playerStatsManager", 3);
-                    playerStatsManager = Object.FindObjectOfType<PlayerStatsManager>() ?? null;
-                    yield return new WaitForSeconds(0.15f);
-
                     Debug.Msg("myPlayer", 3);
                     myPlayer = GetLocalPlayer() ?? player;
                     yield return new WaitForSeconds(0.15f);
@@ -992,34 +762,24 @@ namespace C4PhasMod
 
         public static Transform boneTransform = null;
         public static Camera cameraMain = null;
-        public static List<DNAEvidence> dnaEvidences = null;
-        public static List<Door> doors = null;
+        public static DNAEvidence dnaEvidence = null;
         public static GameController gameController = null;
+        public static OuijaBoard ouijaBoard = null;
         public static GhostAI ghostAI = null;
-        public static List<GhostAI> ghostAIs = null;
         public static List<EMF> emf = null;
         public static EMFData emfData = null;
         public static FuseBox fuseBox = null;
         public static GhostActivity ghostActivity = null;
         public static GhostInteraction ghostInteraction = null;
         public static GhostController ghostController = null;
-        public static GhostEventPlayer ghostEventPlayer = null;
         public static GhostInfo ghostInfo = null;
-        public static List<InventoryItem> items = null;
         public static LevelController levelController = null;
         public static Light light = null;
-        public static LightSwitch lightSwitch = null;
-        public static List<LightSwitch> lightSwitches = null;
         public static Player myPlayer = null;
-        public static List<OuijaBoard> ouijaBoards = null;
         public static PhotonView photonView = null;
         public static Player player = null;
         public static List<Player> players = null;
-        public static LobbyManager lobbyManager = null;
         public static Animator playerAnim = null;
-        public static PlayerStatsManager playerStatsManager = null;
-        public static ServerManager serverManager = null;
-        public static SoundController soundController = null;
         public static List<Window> windows = null;
         public static String ghostNameAge = null;
         public static String ghostType = null;
@@ -1031,11 +791,8 @@ namespace C4PhasMod
         public static String inSight = "";
         public static bool settingsExist = false;
         public static int initializedScene;
-        private bool lightSwitchToggle = false;
-        private bool lightSwitchRunning = false;
         private static bool gameStarted = false;
         private static object coRoutine = null;
-        private static object blinkingLightsRoutine = null;
         private static bool canRun = true;
         private static bool isRunning = false;
         private static String playerName = null;
