@@ -146,7 +146,7 @@ namespace C4PhasMod
                             GUI.color = new Color32(210, 31, 255, 255);
                             string spotName = "";
 
-                            switch ((int)emf.field_Public_EnumNPublicSealedvaGh5vGhGhGhUnique_0)
+                            switch ((int)emf.field_Public_Int32_0)
                             {
                                 case 0:
                                     spotName = "EMF: Interaction";
