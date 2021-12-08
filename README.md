@@ -22,13 +22,10 @@ Place the generated DLL into the MelonLoader Mods folder.
 \- Fullbright mode  
 \- Basic ghost informations (Ghost Name/Type/State, responds to)  
 \- Revealed evidence  
-\- Own sanity  
+\- Show own sanity  
 \- Show active and completed missions  
 \- Console window for logging (MelonLoader)  
-\- Ghost actions: Idle/Appear/Disappear/Interact  
-\- Blinking and turn on/off lights  
-\- Close+Lock/Open+Unlock Exit/All doors  
-\- Change player name
+\- Change player name (can be automated on launch)  
 
 
 **Hotkeys**  
@@ -36,12 +33,6 @@ Insert | Delete | Right Ctrl | RIGHT arrow: Open GUI
 UP arrow: Toggle ESP  
 LEFT arrow: Toggle basic informations  
 DOWN arrow: Toggle fullbright  
-H key: Force ghost to hunt  
-I key: Force ghost to interact with Door/Book/Objects  
-O key: Force ghost to appear  
-P key: Force ghost to stop hunting / appearing  
-L key: Lock all exit doors  
-U key: Unlock all exit doors  
 
 
 **Screenshots**  
@@ -74,7 +65,7 @@ This mod only works with an MelonLoader Bypass or the game will crash because of
 # Credits
 **Fullbright:** `ShieldSupporter` for sharing the code from `Plagues`  
 **2D Box ESP idea:** `EBro912`  
-**Others:** `HYPExMon5ter`, `tecnocat`, `Jbosh123`, `Martin951`, `Unk0wnV3rm`, `wh0am15533`  
+**Others:** `HYPExMon5ter`, `tecnocat`, `Jbosh123`, `Martin951`, `Unk0wnV3rm`, `wh0am15533`, `Obimook`  
 
 
 # License
