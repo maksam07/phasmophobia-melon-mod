@@ -85,6 +85,9 @@ namespace C4PhasMod
                         case ValueTypePublicSealedObLiOb1InBoStObInBoUnique.EnumNPublicSealedvaSpWrPhPoBaJiMaReShUnique.Obake:
                             Main.evidence = "EMF 5 | Fingerprints | Ghost Orb";
                             break;
+                        case ValueTypePublicSealedObLiOb1InBoStObInBoUnique.EnumNPublicSealedvaSpWrPhPoBaJiMaReShUnique.Mimic:
+                            Main.evidence = "Spirit Box | Fingerprints | Freezing Temperature";
+                            break;
                         default:
                             break;
                     }
