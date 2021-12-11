@@ -30,7 +30,14 @@ namespace C4PhasMod
                 {
                     try
                     {
-                        Main.ghostAI.Appear(Main.GetLocalPlayer());
+                        Main.ghostAI.Appear();
+                        if(Main.ghostAI.field_Public_SanityDrainer_0 != null) Main.ghostAI.field_Public_SanityDrainer_0.enabled = false;
+                        //Code from wh0am15533 (https://www.unknowncheats.me/forum/members/2860743.html)
+                        if (Main.ghostAI.field_Public_Animator_0 != null)
+                        {
+                            ParticleSystemRenderer psRenderer = Main.ghostAI.field_Public_Animator_0.GetComponent<ParticleSystemRenderer>() ?? null;
+                            if (psRenderer != null) psRenderer.enabled = true;
+                        }
                     }
                     catch (System.Exception e)
                     {
@@ -126,13 +133,68 @@ namespace C4PhasMod
 
                 if (CheatToggles.enableEspOuija == true && Main.gameController != null && Main.ouijaBoard != null)
                 {
-
-                    Vector3 vector2 = Main.cameraMain.WorldToScreenPoint(Main.ouijaBoard.transform.position);
-                    if (vector2.z > 0f)
+                    try
                     {
-                        GUI.Label(new Rect(new Vector2(vector2.x, Screen.height - (vector2.y + 1f)), new Vector2(100f, 100f)), "<color=#D11500><b>Ouija Board</b></color>");
-                    }
+                        Vector3 vector2 = Main.cameraMain.WorldToScreenPoint(Main.ouijaBoard.transform.position);
+                        if (vector2.z > 0f)
+                        {
+                            GUI.Label(new Rect(new Vector2(vector2.x, Screen.height - (vector2.y + 1f)), new Vector2(100f, 100f)), "<color=#D11500><b>Ouija Board</b></color>");
+                        }
 
+
+                        foreach (TarotCard tarotCard in Main.tarotCards)
+                        {
+                            Vector3 vector = Camera.main.WorldToScreenPoint(tarotCard.transform.position);
+                            if (vector.z > 0f)
+                            {
+                                GUI.Label(new Rect(new Vector2(vector.x, Screen.height - (vector.y + 1f)), new Vector2(100f, 100f)), "<color=#D11500><b>Tarot Card</b></color>");
+                            }
+                        }
+                        foreach (VoodooDollPin voodooDollPin in Main.voodooDollPins)
+                        {
+                            Vector3 vector = Camera.main.WorldToScreenPoint(voodooDollPin.transform.position);
+                            if (vector.z > 0f)
+                            {
+                                GUI.Label(new Rect(new Vector2(vector.x, Screen.height - (vector.y + 1f)), new Vector2(100f, 100f)), "<color=#D11500><b>Voodoo Doll Pin</b></color>");
+                            }
+                        }
+                        foreach (VoodooDoll voodooDoll in Main.voodooDolls)
+                        {
+                            Vector3 vector = Camera.main.WorldToScreenPoint(voodooDoll.transform.position);
+                            if (vector.z > 0f)
+                            {
+                                GUI.Label(new Rect(new Vector2(vector.x, Screen.height - (vector.y + 1f)), new Vector2(100f, 100f)), "<color=#D11500><b>Tarot Card</b></color>");
+                            }
+                        }
+                        foreach (MusicBox musicBox in Main.musicBoxs)
+                        {
+                            Vector3 vector = Camera.main.WorldToScreenPoint(musicBox.transform.position);
+                            if (vector.z > 0f)
+                            {
+                                GUI.Label(new Rect(new Vector2(vector.x, Screen.height - (vector.y + 1f)), new Vector2(100f, 100f)), "<color=#D11500><b>Music Box</b></color>");
+                            }
+                        }
+                        foreach (HauntedMirror hauntedMirror in Main.hauntedMirrors)
+                        {
+                            Vector3 vector = Camera.main.WorldToScreenPoint(hauntedMirror.transform.position);
+                            if (vector.z > 0f)
+                            {
+                                GUI.Label(new Rect(new Vector2(vector.x, Screen.height - (vector.y + 1f)), new Vector2(100f, 100f)), "<color=#D11500><b>Haunted Mirror</b></color>");
+                            }
+                        }
+                        foreach (SummoningCircle summoningCircle in Main.summoningCircles)
+                        {
+                            Vector3 vector = Camera.main.WorldToScreenPoint(summoningCircle.transform.position);
+                            if (vector.z > 0f)
+                            {
+                                GUI.Label(new Rect(new Vector2(vector.x, Screen.height - (vector.y + 1f)), new Vector2(100f, 100f)), "<color=#D11500><b>Summoning Circle</b></color>");
+                            }
+                        }
+                    }
+                    catch (System.Exception ex)
+                    {
+                        Debug.Msg(ex.ToString(),3);
+                    }
                 }
 
                 if (CheatToggles.enableEspEmf == true && Main.gameController != null && Main.emf != null && Main.emf.Count > 0)

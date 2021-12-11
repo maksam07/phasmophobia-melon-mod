@@ -245,10 +245,10 @@ namespace C4PhasMod
                             Debug.Msg("Bone ESP: Toggled " + (CheatToggles.enableEspBone ? "On" : "Off"), 1);
 
                         }
-                        if (GUI.Toggle(new Rect(650f, 142f, 150f, 20f), CheatToggles.enableEspOuija, "Ouija ESP") != CheatToggles.enableEspOuija)
+                        if (GUI.Toggle(new Rect(650f, 142f, 150f, 20f), CheatToggles.enableEspOuija, "Cursed Items ESP") != CheatToggles.enableEspOuija)
                         {
                             CheatToggles.enableEspOuija = !CheatToggles.enableEspOuija;
-                            Debug.Msg("Ouija ESP: Toggled " + (CheatToggles.enableEspOuija ? "On" : "Off"), 1);
+                            Debug.Msg("Cursed Items ESP: Toggled " + (CheatToggles.enableEspOuija ? "On" : "Off"), 1);
 
                         }
                         if (GUI.Toggle(new Rect(650f, 162f, 150f, 20f), CheatToggles.enableEspFuseBox, "FuseBox ESP") != CheatToggles.enableEspFuseBox)
@@ -625,6 +625,30 @@ namespace C4PhasMod
                 ouijaBoard = Object.FindObjectOfType<OuijaBoard>() ?? null;
                 yield return new WaitForSeconds(0.15f);
 
+                Debug.Msg("tarotCards", 3);
+                Main.tarotCards = Object.FindObjectsOfType<TarotCard>().ToList<TarotCard>() ?? null;
+                yield return new WaitForSeconds(0.15f);
+
+                Debug.Msg("voodooDollPin", 3);
+                Main.voodooDollPins = Object.FindObjectsOfType<VoodooDollPin>().ToList<VoodooDollPin>() ?? null;
+                yield return new WaitForSeconds(0.15f);
+
+                Debug.Msg("voodooDoll", 3);
+                Main.voodooDolls = Object.FindObjectsOfType<VoodooDoll>().ToList<VoodooDoll>() ?? null;
+                yield return new WaitForSeconds(0.15f);
+
+                Debug.Msg("musicBox", 3);
+                Main.musicBoxs = Object.FindObjectsOfType<MusicBox>().ToList<MusicBox>() ?? null;
+                yield return new WaitForSeconds(0.15f);
+
+                Debug.Msg("hauntedMirror", 3);
+                Main.hauntedMirrors = Object.FindObjectsOfType<HauntedMirror>().ToList<HauntedMirror>() ?? null;
+                yield return new WaitForSeconds(0.15f);
+
+                Debug.Msg("summoningCircle", 3);
+                Main.summoningCircles = Object.FindObjectsOfType<SummoningCircle>().ToList<SummoningCircle>() ?? null;
+                yield return new WaitForSeconds(0.15f);
+
                 Debug.Msg("fuseBox", 3);
                 fuseBox = Object.FindObjectOfType<FuseBox>() ?? null;
                 yield return new WaitForSeconds(0.15f);
@@ -764,7 +788,13 @@ namespace C4PhasMod
         public static Camera cameraMain = null;
         public static DNAEvidence dnaEvidence = null;
         public static GameController gameController = null;
-        public static OuijaBoard ouijaBoard = null;
+        public static OuijaBoard ouijaBoard = null; 
+        public static List<TarotCard> tarotCards = null;
+        public static List<VoodooDollPin> voodooDollPins = null;
+        public static List<VoodooDoll> voodooDolls = null;
+        public static List<MusicBox> musicBoxs = null;
+        public static List<HauntedMirror> hauntedMirrors = null;
+        public static List<SummoningCircle> summoningCircles= null;
         public static GhostAI ghostAI = null;
         public static List<EMF> emf = null;
         public static EMFData emfData = null;
