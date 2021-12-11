@@ -17,7 +17,8 @@ Place the generated DLL into the MelonLoader Mods folder.
 **Features**  
 \- Simple Box ESP  
 \- Ghost Bone ESP  
-\- Bone/OuijaBoard/FuseBox/EMF ESP  
+\- Bone/FuseBox/EMF ESP  
+\- Cursed Items ESP (partial tested|can include bugs)  
 \- Show Ghost ESP function  
 \- Fullbright mode  
 \- Basic ghost informations (Ghost Name/Type/State, responds to)  
