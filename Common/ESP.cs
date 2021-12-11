@@ -163,7 +163,7 @@ namespace C4PhasMod
                             Vector3 vector = Camera.main.WorldToScreenPoint(voodooDoll.transform.position);
                             if (vector.z > 0f)
                             {
-                                GUI.Label(new Rect(new Vector2(vector.x, Screen.height - (vector.y + 1f)), new Vector2(100f, 100f)), "<color=#D11500><b>Tarot Card</b></color>");
+                                GUI.Label(new Rect(new Vector2(vector.x, Screen.height - (vector.y + 1f)), new Vector2(100f, 100f)), "<color=#D11500><b>Voodoo Doll</b></color>");
                             }
                         }
                         foreach (MusicBox musicBox in Main.musicBoxs)
