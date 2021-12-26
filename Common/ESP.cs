@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace C4PhasMod
 {
@@ -55,7 +56,7 @@ namespace C4PhasMod
 
                 if (CheatToggles.enableEspGhostBone && Main.gameController != null && Main.ghostAI != null)
                 {
-                    ESP.ProcessBones(Main.ghostAI.field_Public_Animator_0);
+                    ESP.ProcessBones(Main.ghostAI.field_Public_Animator_0, Color.cyan);
                     if (CheatToggles.enableEspGhostFinger) ESP.ProcessFingers(Main.ghostAI.field_Public_Animator_0);
 
                     /* DEBUGGING CODE */
@@ -105,12 +106,22 @@ namespace C4PhasMod
                         float playerTopMid = playerNeckMid - (playerBottomMid - playerNeckMid) / 5;
                         float boxHeight = (playerBottomMid - playerTopMid);
                         float boxWidth = boxHeight / 1.8f;
+                        String nickname = player.field_Public_PhotonView_0.Owner.NickName;
 
                         if (w2s.z < 0)
                             continue;
 
+                        if (CheatToggles.enableBIPlayer) {
+                            try
+                            {
+                                String playerSanity = Math.Round(100 - player.field_Public_PlayerSanity_0.field_Public_Single_0, 0).ToString();
+                                nickname += " (" + playerSanity + "%)";
+                            }
+                            catch (Exception) {}
+                        }
+
                         Drawing.DrawBoxOutline(new Vector2(w2s.x - (boxWidth / 2f), playerNeckMid), boxWidth, boxHeight, Color.green);
-                        GUI.Label(new Rect(new Vector2(w2s.x, Screen.height - (w2s.y + 1f)), new Vector2(100f, 100f)), player.field_Public_PhotonView_0.Owner.NickName);
+                        GUI.Label(new Rect(new Vector2(w2s.x - (boxWidth / 2f), Screen.height - (w2s.y + 1f)), new Vector2(100f, 100f)), nickname);
                     }
                 }
 
@@ -118,7 +129,7 @@ namespace C4PhasMod
                 {
                     foreach (Player player in Main.players)
                     {
-                        ESP.ProcessBones(player.field_Public_Animator_0);
+                        ESP.ProcessBones(player.field_Public_Animator_0, Color.green);
                     }
                 }
 
@@ -239,12 +250,12 @@ namespace C4PhasMod
             }
         }
 
-        private static void ProcessBones(Animator boneSource)
+        private static void ProcessBones(Animator boneSource, Color color)
         {
             GUIStyle guiStyle = new GUIStyle();
-            GUI.color = Color.cyan;
+            GUI.color = color;
             guiStyle.set_fontSize(15); 
-            guiStyle.normal.set_textColor(Color.cyan);
+            guiStyle.normal.set_textColor(color);
 
             HumanBodyBones[] bonesToDraw =
             {
@@ -299,7 +310,7 @@ namespace C4PhasMod
                     Vector3 nextBone = ESP.getBonePos(bonesToDraw[i + 1], boneSource);
 
                     if (bonePos.x != 0 && nextBone.x != 0)
-                        Drawing.DrawLine(new Vector2(bonePos.x, (float)Screen.height - bonePos.y), new Vector2(nextBone.x, (float)Screen.height - nextBone.y), Color.cyan, 2);
+                        Drawing.DrawLine(new Vector2(bonePos.x, (float)Screen.height - bonePos.y), new Vector2(nextBone.x, (float)Screen.height - nextBone.y), color, 2);
                 }
                 i++;
             }
