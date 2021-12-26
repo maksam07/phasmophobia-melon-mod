@@ -172,6 +172,7 @@ namespace C4PhasMod
             {
                 if (initializedScene > 1)
                 {
+                    GUI.Label(new Rect(500f, 0f, 400f, 210f), "", "box");
                     if (GUI.Toggle(new Rect(500f, 2f, 150f, 20f), CheatToggles.guiGhost, "Ghost GUI") != CheatToggles.guiGhost)
                     {
                         CheatToggles.guiGhost = !CheatToggles.guiGhost;
