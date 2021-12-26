@@ -205,7 +205,7 @@ namespace C4PhasMod
                 Debug.Msg("missions", 3);
                 foreach (Mission mission in MissionManager.field_Public_Static_MissionManager_0.field_Public_List_1_Mission_0)
                 {
-                    GUI.Label(new Rect(10f, 80f + (float)missionNum * 15f, 600f, 50f), string.Concat(new object[]
+                    GUI.Label(new Rect(10f, 80f + (float)missionNum * 15f, 480f, 30f), string.Concat(new object[]
                     {
                         ((mission.field_Public_Boolean_0) ? "<color=#CCCCCC>" : "<color=#00FF00>"),
                         "<b>" + missionNum + "</b>",
@@ -215,6 +215,11 @@ namespace C4PhasMod
                     }));
                     missionNum++;
                 }
+
+                GUI.Label(new Rect(10f, 80f + (float)missionNum * 15f, 480f, 200f), string.Concat(new object[]
+                    {
+                        "<color=#FFFFFF>",  MissionManager.field_Public_Static_MissionManager_0.missionDescription.text, "</color>"
+                    }));
             }
         }
 

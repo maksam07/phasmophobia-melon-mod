@@ -457,40 +457,45 @@ namespace C4PhasMod
                 }
             }
 
-            if (CheatToggles.enableEspGhost || CheatToggles.enableEspGhostVisible || CheatToggles.enableEspGhostBone ||CheatToggles.enableEspPlayer || CheatToggles.enableEspBone || CheatToggles.enableEspOuija || CheatToggles.enableEspEmf || CheatToggles.enableEspFuseBox)
-            {
-                ESP.Enable();
-            }
-
-            if (CheatToggles.enableBIGhost || CheatToggles.enableBIMissions || CheatToggles.enableBIPlayer)
-            {
-                GUI.Label(new Rect(0f, 0f, 500f, 160f), "", "box");
-            }
-            if (CheatToggles.enableBIGhost)
-            {
-                BasicInformations.EnableGhost();
-                GUI.Label(new Rect(10f, 2f, 300f, 50f), "<color=#00FF00><b>Ghost Name:</b> " + (ghostNameAge ?? "") + "</color>");
-                GUI.Label(new Rect(10f, 17f, 300f, 50f), "<color=#00FF00><b>Ghost Type:</b> " + (ghostType ?? "") + "</color>");
-                GUI.Label(new Rect(10f, 47f, 400f, 50f), "<color=#00FF00><b>Evidence:</b> " + (evidence ?? "") + "</color>");
-                GUI.Label(new Rect(10f, 32f, 300f, 50f), "<color=#00FF00><b>Ghost State:</b> " + (ghostState ?? "") + "</color>");
-                GUI.Label(new Rect(10f, 62f, 400f, 50f), "<color=#00FF00><b>Responds to:</b> " + (ghostIsShy ?? "") + "</color>");
-            }
-            else
-            {
-                if (initializedScene > 1)
+            if (initializedScene > 1) {
+                if (CheatToggles.enableEspGhost || CheatToggles.enableEspGhostVisible || CheatToggles.enableEspGhostBone ||CheatToggles.enableEspPlayer || CheatToggles.enableEspBone || CheatToggles.enableEspOuija || CheatToggles.enableEspEmf || CheatToggles.enableEspFuseBox)
                 {
-                    BasicInformations.DisableGhost();
+                    ESP.Enable();
+                }
+
+                if (CheatToggles.enableBIGhost || CheatToggles.enableBIMissions || CheatToggles.enableBIPlayer)
+                {
+                    GUI.Label(new Rect(0f, 0f, 500f, 220f), "", "box");
+                }
+
+                if (CheatToggles.enableBIGhost)
+                {
+                    BasicInformations.EnableGhost();
+                    GUI.Label(new Rect(10f, 2f, 300f, 50f), "<color=#00FF00><b>Ghost Name:</b> " + (ghostNameAge ?? "") + "</color>");
+                    GUI.Label(new Rect(10f, 17f, 300f, 50f), "<color=#00FF00><b>Ghost Type:</b> " + (ghostType ?? "") + "</color>");
+                    GUI.Label(new Rect(10f, 47f, 400f, 50f), "<color=#00FF00><b>Evidence:</b> " + (evidence ?? "") + "</color>");
+                    GUI.Label(new Rect(10f, 32f, 300f, 50f), "<color=#00FF00><b>Ghost State:</b> " + (ghostState ?? "") + "</color>");
+                    GUI.Label(new Rect(10f, 62f, 400f, 50f), "<color=#00FF00><b>Responds to:</b> " + (ghostIsShy ?? "") + "</color>");
+                }
+            
+
+                if (CheatToggles.enableBIMissions)
+                {
+                    BasicInformations.EnableMissions();
+                }
+
+                if (CheatToggles.enableBIPlayer)
+                {
+                    BasicInformations.EnablePlayer();
+                    GUI.Label(new Rect(10f, 77f, 300f, 50f), "<color=#00FF00><b>My Sanity:</b> " + (myPlayerSanity ?? "N/A") + "</color>");
                 }
             }
-            if (CheatToggles.enableBIMissions)
+            
+            if (!CheatToggles.enableBIGhost && initializedScene > 1)
             {
-                BasicInformations.EnableMissions();
+                BasicInformations.DisableGhost();
             }
-            if (CheatToggles.enableBIPlayer)
-            {
-                BasicInformations.EnablePlayer();
-                GUI.Label(new Rect(10f, 77f, 300f, 50f), "<color=#00FF00><b>My Sanity:</b> " + (myPlayerSanity ?? "N/A") + "</color>");
-            }
+
             if (CheatToggles.enableInfStamina)
             {
                 myPlayer.field_Public_PlayerStamina_0.field_Protected_Boolean_1 = false;
@@ -512,6 +517,7 @@ namespace C4PhasMod
                 {
                     playerPR.nickName = playerName;
                     playerPR.NickName = playerName;
+                    System.IO.File.WriteAllText(System.IO.Directory.GetCurrentDirectory() + @"\nickname.txt", localPlayer.name);
                 }
             }
         }
@@ -753,17 +759,22 @@ namespace C4PhasMod
 
                     if (!nicknameChanged)
                     {
+                        nicknameChanged = true;
+                        Photon.Realtime.Player playerPR = PhotonNetwork.LocalPlayer ?? null;
+                        if (playerPR != null)
+                        {
+                            //playerPR.nickName = playerName;
+                            //playerPR.NickName = playerName;
+                            playerName = playerPR.nickName;
+                        }
+
                         if (System.IO.File.Exists(System.IO.Directory.GetCurrentDirectory() + @"\nickname.txt"))
                         {
                             Debug.Msg("nickname.txt found...", 1);
                             String nicknameTxt = System.IO.File.ReadLines(System.IO.Directory.GetCurrentDirectory() + @"\nickname.txt").First();
                             Debug.Msg("ChangeNickname executing...", 1);
+                            playerName = nicknameTxt;
                             ChangeNickname(nicknameTxt);
-                            nicknameChanged = true;
-                        }
-                        else
-                        {
-                            nicknameChanged = true;
                         }
                     }
                     yield return new WaitForSeconds(0.15f);
