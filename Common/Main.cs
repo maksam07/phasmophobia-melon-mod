@@ -168,6 +168,13 @@ namespace C4PhasMod
         }
         public override void OnGUI()
         {
+            if (!isPluginLoaded) {
+                GUI.Label(new Rect(0f, 0f, 200f, 30f), "", "box");
+                GUI.Label(new Rect(5f, 4f, 180f, 30f), "<color=#FFFF00><b>Plugin loading...</b></color>");
+                if (myPlayer != null)
+                    isPluginLoaded = true;
+            }
+
             if (CheatToggles.guiEnabled)
             {
                 if (initializedScene > 1)
@@ -763,8 +770,6 @@ namespace C4PhasMod
                         Photon.Realtime.Player playerPR = PhotonNetwork.LocalPlayer ?? null;
                         if (playerPR != null)
                         {
-                            //playerPR.nickName = playerName;
-                            //playerPR.NickName = playerName;
                             playerName = playerPR.nickName;
                         }
 
@@ -839,5 +844,6 @@ namespace C4PhasMod
         private static bool isRunning = false;
         private static String playerName = null;
         private static bool nicknameChanged = false;
+        private static bool isPluginLoaded = false;
     }
 }
