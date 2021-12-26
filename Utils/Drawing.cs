@@ -10,8 +10,8 @@ namespace C4PhasMod
         public static void DrawString(Vector2 position, string label, Color color, int fontSize, bool centered = true)
         {
             GUI.color = color;
-            StringStyle.fontSize = fontSize;
-            StringStyle.normal.textColor = color;
+            StringStyle.set_fontSize(fontSize);
+            StringStyle.normal.set_textColor(color);
             var content = new GUIContent(label);
             var size = StringStyle.CalcSize(content);
             var upperLeft = centered ? position - size / 2f : position;

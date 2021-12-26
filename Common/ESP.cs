@@ -243,7 +243,8 @@ namespace C4PhasMod
         {
             GUIStyle guiStyle = new GUIStyle();
             GUI.color = Color.cyan;
-            guiStyle.fontSize = 15; guiStyle.normal.textColor = Color.cyan;
+            guiStyle.set_fontSize(15); 
+            guiStyle.normal.set_textColor(Color.cyan);
 
             HumanBodyBones[] bonesToDraw =
             {
@@ -308,7 +309,8 @@ namespace C4PhasMod
         {
             GUIStyle guiStyle = new GUIStyle();
             GUI.color = Color.cyan;
-            guiStyle.fontSize = 15; guiStyle.normal.textColor = Color.cyan;
+            guiStyle.set_fontSize(15);
+            guiStyle.normal.set_textColor(Color.cyan);
 
             HumanBodyBones[] bonesToDraw =
             {
