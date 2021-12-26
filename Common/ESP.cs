@@ -121,7 +121,7 @@ namespace C4PhasMod
                         }
 
                         Drawing.DrawBoxOutline(new Vector2(w2s.x - (boxWidth / 2f), playerNeckMid), boxWidth, boxHeight, Color.green);
-                        GUI.Label(new Rect(new Vector2(w2s.x - (boxWidth / 2f), Screen.height - (w2s.y + 1f)), new Vector2(100f, 100f)), nickname);
+                        GUI.Label(new Rect(new Vector2(w2s.x, Screen.height - (w2s.y + 1f)), new Vector2(100f, 100f)), nickname);
                     }
                 }
 
@@ -129,6 +129,9 @@ namespace C4PhasMod
                 {
                     foreach (Player player in Main.players)
                     {
+                        if (player.field_Public_PhotonView_0 != null && player.field_Public_PhotonView_0.AmOwner)
+                            continue;
+
                         ESP.ProcessBones(player.field_Public_Animator_0, Color.green);
                     }
                 }
