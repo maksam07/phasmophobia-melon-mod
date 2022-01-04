@@ -524,7 +524,7 @@ namespace C4PhasMod
                 {
                     playerPR.nickName = playerName;
                     playerPR.NickName = playerName;
-                    System.IO.File.WriteAllText(System.IO.Directory.GetCurrentDirectory() + @"\nickname.txt", localPlayer.name);
+                    MelonPreferences.SetEntryValue<string>("Settings", "nickname", playerName);
                 }
             }
         }
@@ -607,6 +607,7 @@ namespace C4PhasMod
             MelonPreferences.CreateEntry("Settings", "DebugM3Enabled", false, "Debug M3 Enabled");
             Debug.Msg("Create Entry: Debug3Enabled", 3);
 
+            MelonPreferences.CreateEntry("Settings", "nickname", "", "Nickname");
             MelonPreferences.Save();
 
             settingsExist = MelonPreferences.HasEntry("Settings", "HotkeysEnabled");
@@ -773,11 +774,9 @@ namespace C4PhasMod
                             playerName = playerPR.nickName;
                         }
 
-                        if (System.IO.File.Exists(System.IO.Directory.GetCurrentDirectory() + @"\nickname.txt"))
+                        String nicknameTxt = MelonPreferences.GetEntryValue<string>("Settings", "nickname");
+                        if (!String.IsNullOrEmpty(nicknameTxt)) 
                         {
-                            Debug.Msg("nickname.txt found...", 1);
-                            String nicknameTxt = System.IO.File.ReadLines(System.IO.Directory.GetCurrentDirectory() + @"\nickname.txt").First();
-                            Debug.Msg("ChangeNickname executing...", 1);
                             playerName = nicknameTxt;
                             ChangeNickname(nicknameTxt);
                         }
