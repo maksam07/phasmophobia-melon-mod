@@ -32,7 +32,8 @@ namespace C4PhasMod {
                             if (psRenderer != null) psRenderer.enabled = true;
                         }
                     } catch (System.Exception e) {
-                        Debug.Msg("Exception: " + e, 3);
+                        string lineNumber = new System.Diagnostics.StackTrace(e, true).GetFrame(0).GetFileLineNumber().ToString();
+                        Debug.Msg("Exception [line: " + lineNumber + "]: " + e, 3);
                     }
 
                     Main.ghostAI.field_Public_SanityDrainer_0.enabled = false;
@@ -169,8 +170,9 @@ namespace C4PhasMod {
                                 GUI.Label(new Rect(new Vector2(vector.x, Screen.height - (vector.y + 1f)), new Vector2(100f, 100f)), "<color=#D11500><b>Summoning Circle</b></color>");
                             }
                         }
-                    } catch (System.Exception ex) {
-                        Debug.Msg(ex.ToString(), 3);
+                    } catch (Exception e) {
+                        string lineNumber = new System.Diagnostics.StackTrace(e, true).GetFrame(0).GetFileLineNumber().ToString();
+                        Debug.Msg("Exception [line: " + lineNumber + "]: " + e.ToString(), 3);
                     }
                 }
 
@@ -361,8 +363,9 @@ namespace C4PhasMod {
             Transform boneTransf = null;
             try {
                 boneTransf = boneSource.GetBoneTransform(bone);
-            } catch (System.Exception e) {
-                Debug.Msg("Exception: " + e, 3);
+            } catch (Exception e) {
+                string lineNumber = new System.Diagnostics.StackTrace(e, true).GetFrame(0).GetFileLineNumber().ToString();
+                Debug.Msg("Exception [line: " + lineNumber + "]: " + e, 3);
             }
             return (boneTransf != null) ? Main.cameraMain.WorldToScreenPoint(boneTransf.position) : new Vector3(0, 0, 0);
         }

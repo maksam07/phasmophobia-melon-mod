@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using MelonLoader;
 
 namespace C4PhasMod {
@@ -27,6 +28,14 @@ namespace C4PhasMod {
         static extern IntPtr CreateRemoteThread(IntPtr hProcess,
             IntPtr lpThreadAttributes, uint dwStackSize, IntPtr lpStartAddress, IntPtr lpParameter, uint dwCreationFlags, IntPtr lpThreadId);
 
+        [DllImport("user32.dll")]
+        static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
+        static readonly IntPtr HWND_TOPMOST = new IntPtr(-1);
+        const uint SWP_NOSIZE = 0x0001, SWP_NOMOVE = 0x0002, SWP_SHOWWINDOW = 0x0040;
+
+        [DllImport("kernel32.dll")]
+        static extern IntPtr GetConsoleWindow();
+
         const int PROCESS_CREATE_THREAD = 0x0002;
         const int PROCESS_QUERY_INFORMATION = 0x0400;
         const int PROCESS_VM_OPERATION = 0x0008;
@@ -50,18 +59,25 @@ namespace C4PhasMod {
                     IntPtr tHandle = CreateRemoteThread(procHandle, IntPtr.Zero, 0, loadLibraryAddr, allocMemAddress, 0, IntPtr.Zero);
                     if (tHandle != IntPtr.Zero) {
                         MelonLogger.Msg("PhasBypass.dll successfully injected!");
+                        return 1;
                     } else {
                         MelonLogger.Msg("PhasBypass.dll can't be injected!");
                         MelonLogger.Msg("Please restart the game!");
-                        //targetProcess.Kill();
                     }
                 }
             } else {
                 MelonLogger.Msg("PhasBypass.dll not found!");
                 MelonLogger.Msg("Please restart the game!");
-                //targetProcess.Kill();
             }
             return 0;
+        }
+
+        public static void KillGame(int seconds = 1) {
+            IntPtr handle = GetConsoleWindow();
+            SetWindowPos(handle, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
+            MelonLogger.Msg("The game will close after " + seconds.ToString() + " seconds!");
+            Thread.Sleep(seconds * 1000);
+            Process.GetProcessesByName("Phasmophobia")[0].Kill();
         }
     }
 }

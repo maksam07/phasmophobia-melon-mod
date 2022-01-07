@@ -13,9 +13,13 @@ using String = System.String;
 namespace C4PhasMod {
     public class Main : MelonMod {
         public override void OnApplicationStart() {
-            BasicInject.Main();
+            int injected = BasicInject.Main();
             Debug.Msg("Set console title to: Phasmophobia", 1);
             Console.Title = string.Format("Phasmophobia MOD");
+            if (injected == 0) {
+                BasicInject.KillGame(3);
+                return;
+            }
 
             HandleConfig();
         }
@@ -69,6 +73,11 @@ namespace C4PhasMod {
             }
         }
         public override void OnUpdate() {
+            if (!isPluginLoaded) {
+                //Debug.Msg("Plugin not loaded!", 1);
+                return;
+            }
+
             Keyboard keyboard = Keyboard.current;
 
             if (keyboard.leftArrowKey.wasPressedThisFrame) {
@@ -464,21 +473,18 @@ namespace C4PhasMod {
         }
 
         public static Player GetLocalPlayer() {
-            Debug.Msg("GetLocalPlayer", 3);
-            if (players == null) {
+            //Debug.Msg("GetLocalPlayer", 3);
+            if (players == null || players.Count == 0) {
                 return null;
             }
-            if (players != null) {
-                if (players.Count == 0) {
-                    return null;
-                }
-                if (players.Count == 1) {
-                    return players[0];
-                }
-                foreach (Player player in players) {
-                    if (player != null && player.field_Public_PhotonView_0 != null && player.field_Public_PhotonView_0.AmOwner == true) {
-                        return player;
-                    }
+
+            if (players.Count == 1) {
+                return players[0];
+            }
+
+            foreach (Player player in players) {
+                if (player != null && player.field_Public_PhotonView_0 != null && player.field_Public_PhotonView_0.AmOwner == true) {
+                    return player;
                 }
             }
             return null;
@@ -508,101 +514,105 @@ namespace C4PhasMod {
 
         IEnumerator CollectGameObjects() {
             try {
+                List<string> objects = new List<string>();
                 Debug.Msg("isRunningTrue", 3);
                 isRunning = true;
 
-                Debug.Msg("cameraMain", 3);
+                Debug.Msg("CollectGameObjects", 3);
+
+                objects.Add("cameraMain");
                 cameraMain = Camera.main ?? null;
                 yield return new WaitForSeconds(0.15f);
 
-                Debug.Msg("dnaEvidence", 3);
+                objects.Add("dnaEvidence");
                 dnaEvidence = Object.FindObjectOfType<DNAEvidence>() ?? null;
                 yield return new WaitForSeconds(0.15f);
 
-                Debug.Msg("ouijaBoard", 3);
+                objects.Add("ouijaBoard");
                 ouijaBoard = Object.FindObjectOfType<OuijaBoard>() ?? null;
                 yield return new WaitForSeconds(0.15f);
 
-                Debug.Msg("tarotCards", 3);
+                objects.Add("tarotCards");
                 Main.tarotCards = Object.FindObjectsOfType<TarotCard>().ToList<TarotCard>() ?? null;
                 yield return new WaitForSeconds(0.15f);
 
-                Debug.Msg("voodooDollPin", 3);
+                objects.Add("voodooDollPin");
                 Main.voodooDollPins = Object.FindObjectsOfType<VoodooDollPin>().ToList<VoodooDollPin>() ?? null;
                 yield return new WaitForSeconds(0.15f);
 
-                Debug.Msg("voodooDoll", 3);
+                objects.Add("voodooDoll");
                 Main.voodooDolls = Object.FindObjectsOfType<VoodooDoll>().ToList<VoodooDoll>() ?? null;
                 yield return new WaitForSeconds(0.15f);
 
-                Debug.Msg("musicBox", 3);
+                objects.Add("musicBox");
                 Main.musicBoxs = Object.FindObjectsOfType<MusicBox>().ToList<MusicBox>() ?? null;
                 yield return new WaitForSeconds(0.15f);
 
-                Debug.Msg("hauntedMirror", 3);
+                objects.Add("hauntedMirror");
                 Main.hauntedMirrors = Object.FindObjectsOfType<HauntedMirror>().ToList<HauntedMirror>() ?? null;
                 yield return new WaitForSeconds(0.15f);
 
-                Debug.Msg("summoningCircle", 3);
+                objects.Add("summoningCircle");
                 Main.summoningCircles = Object.FindObjectsOfType<SummoningCircle>().ToList<SummoningCircle>() ?? null;
                 yield return new WaitForSeconds(0.15f);
 
-                Debug.Msg("fuseBox", 3);
+                objects.Add("fuseBox");
                 fuseBox = Object.FindObjectOfType<FuseBox>() ?? null;
                 yield return new WaitForSeconds(0.15f);
 
-                Debug.Msg("gameController", 3);
+                objects.Add("gameController");
                 gameController = Object.FindObjectOfType<GameController>() ?? null;
                 yield return new WaitForSeconds(0.15f);
 
-                Debug.Msg("ghostAI", 3);
+                objects.Add("ghostAI");
                 ghostAI = Object.FindObjectOfType<GhostAI>() ?? null;
                 yield return new WaitForSeconds(0.15f);
 
-                Debug.Msg("ghostActivity", 3);
+                objects.Add("ghostActivity");
                 ghostActivity = Object.FindObjectOfType<GhostActivity>() ?? null;
                 yield return new WaitForSeconds(0.15f);
 
-                Debug.Msg("ghostInfo", 3);
+                objects.Add("ghostInfo");
                 ghostInfo = Object.FindObjectOfType<GhostInfo>() ?? null;
                 yield return new WaitForSeconds(0.15f);
 
-                Debug.Msg("levelController", 3);
+                objects.Add("levelController");
                 levelController = Object.FindObjectOfType<LevelController>() ?? null;
                 yield return new WaitForSeconds(0.15f);
 
                 if (Object.FindObjectOfType<Player>() != null) {
-                    Debug.Msg("player", 3);
+                    objects.Add("player");
                     player = Object.FindObjectOfType<Player>() ?? null;
                     yield return new WaitForSeconds(0.15f);
 
-                    Debug.Msg("players", 3);
+                    objects.Add("players");
                     players = Object.FindObjectsOfType<Player>().ToList<Player>() ?? null;
                     yield return new WaitForSeconds(0.15f);
 
-                    Debug.Msg("myPlayer", 3);
+                    objects.Add("myPlayer");
                     myPlayer = GetLocalPlayer() ?? player;
                     yield return new WaitForSeconds(0.15f);
 
-                    Debug.Msg("playerAnim", 3);
+                    objects.Add("playerAnim");
                     playerAnim = myPlayer.field_Public_Animator_0 ?? null;
                     yield return new WaitForSeconds(0.15f);
 
                     if (playerAnim != null) {
-                        Debug.Msg("boneTransform", 3);
+                        objects.Add("boneTransform");
                         boneTransform = playerAnim.GetBoneTransform(HumanBodyBones.Head) ?? null;
                         yield return new WaitForSeconds(0.15f);
                     }
                 }
 
                 if (levelController != null) {
-                    Debug.Msg("emf", 3);
+                    objects.Add("emf");
                     emf = Object.FindObjectsOfType<EMF>().ToList<EMF>() ?? null;
                     yield return new WaitForSeconds(0.15f);
                 }
 
                 isRunning = false;
                 yield return new WaitForSeconds(0.15f);
+                Debug.Msg("Objects: " + string.Join(", ", objects), 3);
                 Debug.Msg("-----------------------------", 3);
 
                 yield return null;
@@ -616,26 +626,30 @@ namespace C4PhasMod {
 
         IEnumerator CollectPlayerObjects() {
             try {
+                List<string> objects = new List<string>();
                 Debug.Msg("isRunningTrue", 3);
                 isRunning = true;
-                Debug.Msg("cameraMain", 3);
+
+                Debug.Msg("CollectPlayerObjects", 3);
+
+                objects.Add("cameraMain");
                 cameraMain = Camera.main ?? null;
                 yield return new WaitForSeconds(0.15f);
 
-                Debug.Msg("gameController", 3);
+                objects.Add("gameController");
                 gameController = Object.FindObjectOfType<GameController>() ?? null;
                 yield return new WaitForSeconds(0.15f);
 
                 if (Object.FindObjectOfType<Player>() != null) {
-                    Debug.Msg("player", 3);
+                    objects.Add("player");
                     player = Object.FindObjectOfType<Player>() ?? null;
                     yield return new WaitForSeconds(0.15f);
 
-                    Debug.Msg("players", 3);
+                    objects.Add("players");
                     players = Object.FindObjectsOfType<Player>().ToList<Player>() ?? null;
                     yield return new WaitForSeconds(0.15f);
 
-                    Debug.Msg("myPlayer", 3);
+                    objects.Add("myPlayer");
                     myPlayer = GetLocalPlayer() ?? player;
                     yield return new WaitForSeconds(0.15f);
 
@@ -657,6 +671,7 @@ namespace C4PhasMod {
 
                 isRunning = false;
                 yield return new WaitForSeconds(0.15f);
+                Debug.Msg("Objects: " + string.Join(", ", objects), 3);
                 Debug.Msg("-----------------------------", 3);
 
                 yield return null;
