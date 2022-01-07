@@ -1,16 +1,11 @@
 ﻿using System;
 using UnityEngine;
 
-namespace C4PhasMod
-{
-    class ESP
-    {
-        public static void Enable()
-        {
-            if (Main.initializedScene > 1)
-            {
-                if (CheatToggles.enableEspGhost == true && Main.gameController != null && Main.ghostAI != null)
-                {
+namespace C4PhasMod {
+    class ESP {
+        public static void Enable() {
+            if (Main.initializedScene > 1) {
+                if (CheatToggles.enableEspGhost == true && Main.gameController != null && Main.ghostAI != null) {
                     Vector3 w2s = Main.cameraMain.WorldToScreenPoint(Main.ghostAI.transform.position);
                     Vector3 ghostPosition = Main.cameraMain.WorldToScreenPoint(Main.ghostAI.field_Public_Transform_0.transform.position);
 
@@ -27,35 +22,28 @@ namespace C4PhasMod
                         Drawing.DrawBoxOutline(new Vector2(w2s.x - (boxWidth / 2f), ghostNeckMid), boxWidth, boxHeight, Color.cyan);
                 }
 
-                if (CheatToggles.enableEspGhostVisible == true && Main.gameController != null && Main.ghostAI != null)
-                {
-                    try
-                    {
+                if (CheatToggles.enableEspGhostVisible == true && Main.gameController != null && Main.ghostAI != null) {
+                    try {
                         Main.ghostAI.Appear();
-                        if(Main.ghostAI.field_Public_SanityDrainer_0 != null) Main.ghostAI.field_Public_SanityDrainer_0.enabled = false;
+                        if (Main.ghostAI.field_Public_SanityDrainer_0 != null) Main.ghostAI.field_Public_SanityDrainer_0.enabled = false;
                         //Code from wh0am15533 (https://www.unknowncheats.me/forum/members/2860743.html)
-                        if (Main.ghostAI.field_Public_Animator_0 != null)
-                        {
+                        if (Main.ghostAI.field_Public_Animator_0 != null) {
                             ParticleSystemRenderer psRenderer = Main.ghostAI.field_Public_Animator_0.GetComponent<ParticleSystemRenderer>() ?? null;
                             if (psRenderer != null) psRenderer.enabled = true;
                         }
-                    }
-                    catch (System.Exception e)
-                    {
+                    } catch (System.Exception e) {
                         Debug.Msg("Exception: " + e, 3);
                     }
 
                     Main.ghostAI.field_Public_SanityDrainer_0.enabled = false;
                     //Code from wh0am15533 (https://www.unknowncheats.me/forum/members/2860743.html)
-                    if (Main.ghostAI.field_Public_Animator_0 != null)
-                    {
+                    if (Main.ghostAI.field_Public_Animator_0 != null) {
                         ParticleSystemRenderer psRenderer = Main.ghostAI.field_Public_Animator_0.GetComponent<ParticleSystemRenderer>() ?? null;
                         if (psRenderer != null) psRenderer.enabled = true;
                     }
                 }
 
-                if (CheatToggles.enableEspGhostBone && Main.gameController != null && Main.ghostAI != null)
-                {
+                if (CheatToggles.enableEspGhostBone && Main.gameController != null && Main.ghostAI != null) {
                     ESP.ProcessBones(Main.ghostAI.field_Public_Animator_0, Color.cyan);
                     if (CheatToggles.enableEspGhostFinger) ESP.ProcessFingers(Main.ghostAI.field_Public_Animator_0);
 
@@ -91,10 +79,8 @@ namespace C4PhasMod
                     //}
                 }
 
-                if (CheatToggles.enableEspPlayer == true && Main.gameController != null && Main.players != null && Main.players.Count > 1)
-                {
-                    foreach (Player player in Main.players)
-                    {
+                if (CheatToggles.enableEspPlayer == true && Main.gameController != null && Main.players != null && Main.players.Count > 1) {
+                    foreach (Player player in Main.players) {
                         if (player.field_Public_PhotonView_0 != null && player.field_Public_PhotonView_0.AmOwner)
                             continue;
 
@@ -112,12 +98,10 @@ namespace C4PhasMod
                             continue;
 
                         if (CheatToggles.enableBIPlayer) {
-                            try
-                            {
+                            try {
                                 String playerSanity = Math.Round(100 - player.field_Public_PlayerSanity_0.field_Public_Single_0, 0).ToString();
                                 nickname += " (" + playerSanity + "%)";
-                            }
-                            catch (Exception) {}
+                            } catch (Exception) { }
                         }
 
                         Drawing.DrawBoxOutline(new Vector2(w2s.x - (boxWidth / 2f), playerNeckMid), boxWidth, boxHeight, Color.green);
@@ -125,10 +109,8 @@ namespace C4PhasMod
                     }
                 }
 
-                if (CheatToggles.enableEspPlayerBone == true && Main.gameController != null && Main.players != null && Main.players.Count > 1)
-                {
-                    foreach (Player player in Main.players)
-                    {
+                if (CheatToggles.enableEspPlayerBone == true && Main.gameController != null && Main.players != null && Main.players.Count > 1) {
+                    foreach (Player player in Main.players) {
                         if (player.field_Public_PhotonView_0 != null && player.field_Public_PhotonView_0.AmOwner)
                             continue;
 
@@ -136,94 +118,71 @@ namespace C4PhasMod
                     }
                 }
 
-                if (CheatToggles.enableEspBone == true && Main.gameController != null && Main.dnaEvidence != null)
-                {
+                if (CheatToggles.enableEspBone == true && Main.gameController != null && Main.dnaEvidence != null) {
                     Vector3 vector3 = Main.cameraMain.WorldToScreenPoint(Main.dnaEvidence.transform.position);
-                    if (vector3.z > 0f)
-                    {
+                    if (vector3.z > 0f) {
                         GUI.Label(new Rect(new Vector2(vector3.x, Screen.height - (vector3.y + 1f)), new Vector2(100f, 100f)), "<color=#FFFFFF><b>Bone</b></color>");
                     }
                 }
 
-                if (CheatToggles.enableEspOuija == true && Main.gameController != null && Main.ouijaBoard != null)
-                {
-                    try
-                    {
+                if (CheatToggles.enableEspOuija == true && Main.gameController != null && Main.ouijaBoard != null) {
+                    try {
                         Vector3 vector2 = Main.cameraMain.WorldToScreenPoint(Main.ouijaBoard.transform.position);
-                        if (vector2.z > 0f)
-                        {
+                        if (vector2.z > 0f) {
                             GUI.Label(new Rect(new Vector2(vector2.x, Screen.height - (vector2.y + 1f)), new Vector2(100f, 100f)), "<color=#D11500><b>Ouija Board</b></color>");
                         }
 
 
-                        foreach (TarotCard tarotCard in Main.tarotCards)
-                        {
+                        foreach (TarotCard tarotCard in Main.tarotCards) {
                             Vector3 vector = Camera.main.WorldToScreenPoint(tarotCard.transform.position);
-                            if (vector.z > 0f)
-                            {
+                            if (vector.z > 0f) {
                                 GUI.Label(new Rect(new Vector2(vector.x, Screen.height - (vector.y + 1f)), new Vector2(100f, 100f)), "<color=#D11500><b>Tarot Card</b></color>");
                             }
                         }
-                        foreach (VoodooDollPin voodooDollPin in Main.voodooDollPins)
-                        {
+                        foreach (VoodooDollPin voodooDollPin in Main.voodooDollPins) {
                             Vector3 vector = Camera.main.WorldToScreenPoint(voodooDollPin.transform.position);
-                            if (vector.z > 0f)
-                            {
+                            if (vector.z > 0f) {
                                 GUI.Label(new Rect(new Vector2(vector.x, Screen.height - (vector.y + 1f)), new Vector2(100f, 100f)), "<color=#D11500><b>Voodoo Doll Pin</b></color>");
                             }
                         }
-                        foreach (VoodooDoll voodooDoll in Main.voodooDolls)
-                        {
+                        foreach (VoodooDoll voodooDoll in Main.voodooDolls) {
                             Vector3 vector = Camera.main.WorldToScreenPoint(voodooDoll.transform.position);
-                            if (vector.z > 0f)
-                            {
+                            if (vector.z > 0f) {
                                 GUI.Label(new Rect(new Vector2(vector.x, Screen.height - (vector.y + 1f)), new Vector2(100f, 100f)), "<color=#D11500><b>Voodoo Doll</b></color>");
                             }
                         }
-                        foreach (MusicBox musicBox in Main.musicBoxs)
-                        {
+                        foreach (MusicBox musicBox in Main.musicBoxs) {
                             Vector3 vector = Camera.main.WorldToScreenPoint(musicBox.transform.position);
-                            if (vector.z > 0f)
-                            {
+                            if (vector.z > 0f) {
                                 GUI.Label(new Rect(new Vector2(vector.x, Screen.height - (vector.y + 1f)), new Vector2(100f, 100f)), "<color=#D11500><b>Music Box</b></color>");
                             }
                         }
-                        foreach (HauntedMirror hauntedMirror in Main.hauntedMirrors)
-                        {
+                        foreach (HauntedMirror hauntedMirror in Main.hauntedMirrors) {
                             Vector3 vector = Camera.main.WorldToScreenPoint(hauntedMirror.transform.position);
-                            if (vector.z > 0f)
-                            {
+                            if (vector.z > 0f) {
                                 GUI.Label(new Rect(new Vector2(vector.x, Screen.height - (vector.y + 1f)), new Vector2(100f, 100f)), "<color=#D11500><b>Haunted Mirror</b></color>");
                             }
                         }
-                        foreach (SummoningCircle summoningCircle in Main.summoningCircles)
-                        {
+                        foreach (SummoningCircle summoningCircle in Main.summoningCircles) {
                             Vector3 vector = Camera.main.WorldToScreenPoint(summoningCircle.transform.position);
-                            if (vector.z > 0f)
-                            {
+                            if (vector.z > 0f) {
                                 GUI.Label(new Rect(new Vector2(vector.x, Screen.height - (vector.y + 1f)), new Vector2(100f, 100f)), "<color=#D11500><b>Summoning Circle</b></color>");
                             }
                         }
-                    }
-                    catch (System.Exception ex)
-                    {
-                        Debug.Msg(ex.ToString(),3);
+                    } catch (System.Exception ex) {
+                        Debug.Msg(ex.ToString(), 3);
                     }
                 }
 
-                if (CheatToggles.enableEspEmf == true && Main.gameController != null && Main.emf != null && Main.emf.Count > 0)
-                {
-                    foreach (EMF emf in Main.emf)
-                    {
+                if (CheatToggles.enableEspEmf == true && Main.gameController != null && Main.emf != null && Main.emf.Count > 0) {
+                    foreach (EMF emf in Main.emf) {
                         Vector3 vector = Camera.main.WorldToScreenPoint(emf.transform.position);
-                        if (vector.z > 0f)
-                        {
+                        if (vector.z > 0f) {
                             vector.y = Screen.height - (vector.y + 1f);
                             GUI.color = new Color32(210, 31, 255, 255);
                             string spotName = "";
 
-                            switch ((int)emf.field_Public_Int32_0)
-                            {
+                            switch ((int)emf.field_Public_Int32_0) {
                                 case 0:
                                     spotName = "EMF: Interaction";
                                     break;
@@ -242,22 +201,19 @@ namespace C4PhasMod
                     }
                 }
 
-                if (CheatToggles.enableEspFuseBox == true && Main.gameController != null && Main.fuseBox != null)
-                {
+                if (CheatToggles.enableEspFuseBox == true && Main.gameController != null && Main.fuseBox != null) {
                     Vector3 vector3 = Main.cameraMain.WorldToScreenPoint(Main.fuseBox.transform.position);
-                    if (vector3.z > 0f)
-                    {
+                    if (vector3.z > 0f) {
                         GUI.Label(new Rect(new Vector2(vector3.x, Screen.height - (vector3.y + 1f)), new Vector2(100f, 100f)), "<color=#EBC634><b>FuseBox</b></color>");
                     }
                 }
             }
         }
 
-        private static void ProcessBones(Animator boneSource, Color color)
-        {
+        private static void ProcessBones(Animator boneSource, Color color) {
             GUIStyle guiStyle = new GUIStyle();
             GUI.color = color;
-            guiStyle.fontSize = 15; 
+            guiStyle.fontSize = 15;
             guiStyle.normal.textColor = color;
 
             HumanBodyBones[] bonesToDraw =
@@ -292,10 +248,8 @@ namespace C4PhasMod
             };
 
             int i = 0;
-            foreach (HumanBodyBones boneToDraw in bonesToDraw)
-            {
-                if (boneToDraw == HumanBodyBones.LastBone)
-                {
+            foreach (HumanBodyBones boneToDraw in bonesToDraw) {
+                if (boneToDraw == HumanBodyBones.LastBone) {
                     i++;
                     continue;
                 }
@@ -308,8 +262,7 @@ namespace C4PhasMod
                 else
                     GUI.DrawTexture(new Rect(bonePos.x - 2.5f, (float)Screen.height - bonePos.y - 2.5f, 5, 5), Texture2D.whiteTexture, ScaleMode.StretchToFill);
 
-                if (i + 1 <= 25 && bonesToDraw[i + 1] != HumanBodyBones.LastBone)
-                {
+                if (i + 1 <= 25 && bonesToDraw[i + 1] != HumanBodyBones.LastBone) {
                     Vector3 nextBone = ESP.getBonePos(bonesToDraw[i + 1], boneSource);
 
                     if (bonePos.x != 0 && nextBone.x != 0)
@@ -319,8 +272,7 @@ namespace C4PhasMod
             }
         }
 
-        private static void ProcessFingers(Animator boneSource)
-        {
+        private static void ProcessFingers(Animator boneSource) {
             GUIStyle guiStyle = new GUIStyle();
             GUI.color = Color.cyan;
             guiStyle.fontSize = 15;
@@ -381,10 +333,8 @@ namespace C4PhasMod
             };
 
             int i = 0;
-            foreach (HumanBodyBones boneToDraw in bonesToDraw)
-            {
-                if (boneToDraw == HumanBodyBones.LastBone)
-                {
+            foreach (HumanBodyBones boneToDraw in bonesToDraw) {
+                if (boneToDraw == HumanBodyBones.LastBone) {
                     i++;
                     continue;
                 }
@@ -397,8 +347,7 @@ namespace C4PhasMod
                 else
                     GUI.DrawTexture(new Rect(bonePos.x - 2.5f, (float)Screen.height - bonePos.y - 2.5f, 5, 5), Texture2D.whiteTexture, ScaleMode.StretchToFill);
 
-                if (i + 1 <= 25 && bonesToDraw[i + 1] != HumanBodyBones.LastBone)
-                {
+                if (i + 1 <= 25 && bonesToDraw[i + 1] != HumanBodyBones.LastBone) {
                     Vector3 nextBone = ESP.getBonePos(bonesToDraw[i + 1], boneSource);
 
                     if (bonePos.x != 0 && nextBone.x != 0)
@@ -408,15 +357,11 @@ namespace C4PhasMod
             }
         }
 
-        private static Vector3 getBonePos(HumanBodyBones bone, Animator boneSource)
-        {
+        private static Vector3 getBonePos(HumanBodyBones bone, Animator boneSource) {
             Transform boneTransf = null;
-            try
-            {
+            try {
                 boneTransf = boneSource.GetBoneTransform(bone);
-            }
-            catch (System.Exception e)
-            {
+            } catch (System.Exception e) {
                 Debug.Msg("Exception: " + e, 3);
             }
             return (boneTransf != null) ? Main.cameraMain.WorldToScreenPoint(boneTransf.position) : new Vector3(0, 0, 0);

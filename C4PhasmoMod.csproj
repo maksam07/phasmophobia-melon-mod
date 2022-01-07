@@ -54,6 +54,7 @@
     <Compile Include="Common\BasicInformations.cs" />
     <Compile Include="Common\ESP.cs" />
     <Compile Include="Common\Fullbright.cs" />
+    <None Include="Common\Main.old" />
     <Compile Include="Common\Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\BuildInfo.cs" />

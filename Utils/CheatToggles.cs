@@ -1,7 +1,5 @@
-﻿namespace C4PhasMod
-{
-    public class CheatToggles
-    {
+﻿namespace C4PhasMod {
+    public class CheatToggles {
         public static bool enableBI = false;
         public static bool enableBIGhost = false;
         public static bool enableBIMissions = false;
